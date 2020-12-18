@@ -1,0 +1,310 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Object Tracking and Pedestrian Detection · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    Problem Sets
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.2.1" data-path="ps_object_tracking.html">
+            
+                <a href="ps_object_tracking.html">
+            
+                    
+                    Object Tracking and Pedestrian Detection
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Object Tracking and Pedestrian Detection</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="problem-set-5-object-tracking-and-pedestrian-detection">Problem Set 5: Object Tracking and Pedestrian Detection</h1>
+<h2 id="description">Description</h2>
+<p>In this problem set you are going to implement tracking methods for image sequences and videos. The main algorithms you will be using are the Kalman and Particle Filters.</p>
+<h2 id="instructions">Instructions</h2>
+<h3 id="1-the-kalman-filter">1. The Kalman Filter</h3>
+<p>The Kalman Filter (KF) is a method used to track linear dynamical systems with gaussian noise. Recall that both the predicted and the corrected states are gaussians, allowing us to keep the mean and covariance of the state in order to run this filter. Use the kalman filter on the provided images to track a moving circle.</p>
+<p>First we need to define the KF&#x2019;s components. We will use the notation presented in the lectures for the N-dimensional case.</p>
+<h4 id="11-state-vector">1.1 State vector</h4>
+<p>We represent the filter&#x2019;s state using the current position and velocities in the x, y plane. We will not use acceleration in our exercise.</p>
+<p>$$
+X= [x, y, v_x, v_y]</p>
+<p>$$</p>
+<h4 id="12-dynamics-model-transition-4x4-matrix-dt">1.2 Dynamics Model transition 4x4 matrix $D_t$</h4>
+<p>This matrix will map the equations below to the state components. Determine how this 4x4 matrix can be used to represent these equations using the state vector.</p>
+<p>$$
+D_t = \left[ \begin{array}{c} 1 &amp;0 &amp;\Delta t &amp;0 \ 
+                              0 &amp;1 &amp;0 &amp;\Delta t \
+                              0 &amp; 0 &amp; 1 &amp; 0 \
+                              0 &amp; 0 &amp; 0 &amp; 1
+                              \end{array} \right]</p>
+<p>$$
+so that:
+$x<em>t = x</em>{t-1} + v<em>x \Delta t $
+$y_t = y</em>{t-1} + v_y \Delta t$</p>
+<p>$\Delta t = 1$ for simplicity</p>
+<h4 id="13-state-and-covariance-prediction">1.3 State and Covariance prediction:</h4>
+<p>We assume that the state vector prediction is based on a linear transformation using the transition matrix $D_t$. And the covariance is obtained from the squaring operation plus the process noise $Q$. We will also assume this noise is independent from each component in the state vector.</p>
+<p>$X<em>t^- = X</em>{t-1}^+ D_t$</p>
+<p>$\Sigma<em>t^- = D_t \Sigma</em>{t-1}^+ D_t^T + Q$</p>
+<p>$$
+Q = \left[ \begin{array}{c} 
+                              \sigma<em>{d_x}^2 &amp;0 &amp;0 &amp;0 \ 
+                              0 &amp;\sigma</em>{d<em>y}^2 &amp;0 &amp;0  \
+                              0 &amp; 0 &amp; \sigma</em>{d<em>{vx}}^2 &amp; 0 \
+                              0 &amp; 0 &amp; 0 &amp; \sigma</em>{d_{vy}}^2
+                              \end{array} \right]</p>
+<p>$$
+Before we continue to the Correction state. We will define our sensor&#x2019;s function as a way to obtain the object&#x2019;s position. In our case we will use a template matching code to obtain these components. In order to make this a little more interesting, we will add some noise to these measurements</p>
+<h4 id="1-4-sensor-measurement-2x4-matrix-mt">1. 4 Sensor measurement 2x4 matrix $M_t$:</h4>
+<p>This matrix maps the available measurements to the state vector defined above. Because we can only obtain two values, $x$ and $y$, it contains two rows and four columns.</p>
+<p>$$
+M_t = \left[ \begin{array}{c}<br>            1 &amp;0 &amp;0 &amp;0 \<br>            0 &amp;1 &amp;0 &amp;0\end{array} \right]</p>
+<p>$$</p>
+<h4 id="15-kalman-gain-kt">1.5 Kalman Gain $K_t$</h4>
+<p>Using the measurement matrix, and the predicted covariance we can now compute the Kalman Gain.
+Here you will also define a measurement noise represented by $\Sigma_{m_t}$</p>
+<p>Kalman gain determines how much weight should be placed on state prediction and how much on measurement update.  It is an averaging factor that depends on uncertainty of state prediction and measurement updates.</p>
+<p>$$
+K<em>t = \Sigma_t^- M_t^T(M_t \Sigma_t^- M_t^T + \Sigma</em>{m_t})^{-1}</p>
+<p>$$</p>
+<p>$$
+\Sigma<em>{m_t} =\left[ \begin{array}{c} 
+                    \sigma</em>{m<em>x}^2 &amp; 0 \
+                    0 &amp; \sigma</em>{m_y}^2
+             \end{array} \right]</p>
+<p>$$</p>
+<h4 id="16-state-and-covariance-correction">1.6 State and Covariance Correction</h4>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Object Tracking and Pedestrian Detection","level":"1.2.1","depth":2,"previous":{"title":"Problem Sets","level":"1.2","depth":1,"ref":"","articles":[{"title":"Object Tracking and Pedestrian Detection","level":"1.2.1","depth":2,"path":"ps_object_tracking.md","ref":"ps_object_tracking.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ps_object_tracking.md","mtime":"2020-12-18T20:36:03.266Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-12-18T20:44:51.659Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
