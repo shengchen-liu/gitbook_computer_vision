@@ -25,7 +25,7 @@ $$
 This matrix will map the equations below to the state components. Determine how this 4x4 matrix can be used to represent these equations using the state vector.
 
 $$
-D_t = \left[ \begin{array}{c} 1 &0 &\Delta t &0 \\ 
+D_t = \left[ \begin{array}{c} 1 &0 &\Delta t &0 \\
 							  0 &1 &0 &\Delta t \\
 							  0 & 0 & 1 & 0 \\
 							  0 & 0 & 0 & 1
@@ -48,8 +48,8 @@ $$X_t^- = X_{t-1}^+ D_t$$
 $$\Sigma_t^- = D_t \Sigma_{t-1}^+ D_t^T + Q$$
 
 $$
-Q = \left[ \begin{array}{c} 
-							  \sigma_{d_x}^2 &0 &0 &0 \\ 
+Q = \left[ \begin{array}{c}
+							  \sigma_{d_x}^2 &0 &0 &0 \\
 							  0 &\sigma_{d_y}^2 &0 &0  \\
 							  0 & 0 & \sigma_{d_{vx}}^2 & 0 \\
 							  0 & 0 & 0 & \sigma_{d_{vy}}^2
@@ -62,7 +62,7 @@ Before we continue to the Correction state. We will define our sensor’s functi
 This matrix maps the available measurements to the state vector defined above. Because we can only obtain two values, $$x$$ and $$y$$, it contains two rows and four columns.
 $$
 M_t = \left[ \begin{array}{c}                               
-		    1 &0 &0 &0 \\                               
+		    1 &0 &0 &0 \\
 		    0 &1 &0 &0\end{array} \right]
 $$
 
@@ -78,7 +78,7 @@ K_t = \Sigma_t^- M_t^T(M_t \Sigma_t^- M_t^T + \Sigma_{m_t})^{-1}
 $$
 
 $$
-\Sigma_{m_t} =\left[ \begin{array}{c} 
+\Sigma_{m_t} =\left[ \begin{array}{c}
 					\sigma_{m_x}^2 & 0 \\
 					0 & \sigma_{m_y}^2
  			\end{array} \right]
