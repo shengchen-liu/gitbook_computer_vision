@@ -1,0 +1,444 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Filtering · Computer Vision Learning Notes</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Shengchen Liu">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Linearity and Convolution.html" />
+    
+    
+    <link rel="prev" href="Image Noise.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://shengchen-liu.github.io/" target="_blank" class="custom-link">Home</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    Basic Image Manipulation
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="Image Noise.html">
+            
+                <a href="Image Noise.html">
+            
+                    
+                    Image Noise
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.2" data-path="Filtering.html">
+            
+                <a href="Filtering.html">
+            
+                    
+                    Filtering
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="Linearity and Convolution.html">
+            
+                <a href="Linearity and Convolution.html">
+            
+                    
+                    Linearity and Convolution
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="Boundary Issues.html">
+            
+                <a href="Boundary Issues.html">
+            
+                    
+                    Boundary Issues
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="Filter as Templates.html">
+            
+                <a href="Filter as Templates.html">
+            
+                    
+                    Filters as Templates
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../edge_detection.html">
+            
+                <a href="../edge_detection.html">
+            
+                    
+                    Edge Detection
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../edge_detection/Gradients.html">
+            
+                <a href="../edge_detection/Gradients.html">
+            
+                    
+                    Gradients
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../hough_transform.html">
+            
+                <a href="../hough_transform.html">
+            
+                    
+                    Hough Transform
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    Problem Sets
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../ps_object_tracking.html">
+            
+                <a href="../ps_object_tracking.html">
+            
+                    
+                    Object Tracking and Pedestrian Detection
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Filtering</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="filtering">Filtering</h1>
+<p>How to remove noise from an image?</p>
+<h2 id="computing-averages">Computing Averages</h2>
+<p>Replace the value of each pixel with the <strong>average</strong> value of the pixels around it.</p>
+<h3 id="assumptions">Assumptions</h3>
+<ul>
+<li>The &quot;true&quot; value of a pixel is probably similar to the &quot;true&quot; values of the nearby pixels.</li>
+<li>The noise in each pixel is added independently.  Thus, the average of the noise around a pixel will be 0.</li>
+</ul>
+<h3 id="weighted-moving-average">Weighted moving average</h3>
+<p>Closer pixels are more similar than further pixels.</p>
+<h3 id="correlation-filtering-with-uniform-weights">Correlation Filtering with Uniform Weights</h3>
+<p><script type="math/tex; mode=display">
+G[i, j] = \frac{1}{(2k + 1)^2} \cdot \sum_{u=-k}^k \sum_{v=-k}^k F[i + u, j + v]
+</script></p>
+<h3 id="correlation-filtering-with-non-uniform-weights">Correlation Filtering with non-uniform Weights</h3>
+<p><script type="math/tex; mode=display">
+G[i, j] = \frac{1}{(2k + 1)^2} \cdot \sum_{u=-k}^k \sum_{v=-k}^k H[u, v] F[i + u, j + v]
+</script></p>
+<p>where <script type="math/tex; ">H[u, v]</script> is the weight function.</p>
+<p>This is also know as <strong>cross-correlation</strong>, denoted as <script type="math/tex; ">G=H \otimes F</script></p>
+<h3 id="drawbacks">Drawbacks</h3>
+<p>Squares aren&apos;t smooth</p>
+<h2 id="blurring-images">Blurring Images</h2>
+<h3 id="gaussian-filter">Gaussian Filter</h3>
+<p><script type="math/tex; mode=display">
+h(u, v) = \frac{1}{2\pi \sigma^2}e^{-\frac{u^2 + v^2}{\sigma^2}}
+</script></p>
+<p>In such a filter, the nearest neighboring pixels have the most influence.  Such weights are &quot;circularly symmetric&quot; which mathematically are said to be isotropic.</p>
+<h4 id="gaussian-parameters">Gaussian Parameters</h4>
+<p>The only parameter is the <strong>variance</strong> <script type="math/tex; ">\sigma^2</script>, which represents &quot;amount of smoothing&quot; that filter performs.</p>
+<p>Modifying the size of kernel is not the same thing as modifying the variance.  The kernel has to be &quot;big enough&quot; to fairly represent the variance and let it perform a smoother blurring.</p>
+<h2 id="more-filter-examples">More Filter Examples</h2>
+<h3 id="sharpening-filter">Sharpening Filter</h3>
+<p>Accentuates the &quot;differences with the local average&quot;, by comparing a more intense version of an image and its box blur</p>
+<h3 id="median-filter">Median Filter</h3>
+<p>Also called an <strong>edge-preserving filter</strong>, this is actually a non-linear filter that is useful for other types of noise in an image.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Image Noise.html" class="navigation navigation-prev " aria-label="Previous page: Image Noise">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Linearity and Convolution.html" class="navigation navigation-next " aria-label="Next page: Linearity and Convolution">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Filtering","level":"1.2.2","depth":2,"next":{"title":"Linearity and Convolution","level":"1.2.3","depth":2,"path":"basic_image_manipulation/Linearity and Convolution.md","ref":"basic_image_manipulation/Linearity and Convolution.md","articles":[]},"previous":{"title":"Image Noise","level":"1.2.1","depth":2,"path":"basic_image_manipulation/Image Noise.md","ref":"basic_image_manipulation/Image Noise.md","articles":[]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"basic_image_manipulation/Filtering.md","mtime":"2021-01-12T05:13:23.170Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-12T05:23:36.717Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-mathjax/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

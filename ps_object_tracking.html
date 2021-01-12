@@ -4,11 +4,11 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Object Tracking and Pedestrian Detection · GitBook</title>
+        <title>Object Tracking and Pedestrian Detection · Computer Vision Learning Notes</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
-        
+        <meta name="author" content="Shengchen Liu">
         
         
     
@@ -78,7 +78,16 @@
 <ul class="summary">
     
     
+    
+        
+        <li>
+            <a href="https://shengchen-liu.github.io/" target="_blank" class="custom-link">Home</a>
+        </li>
+    
+    
 
+    
+    <li class="divider"></li>
     
 
     
@@ -103,7 +112,7 @@
                 <span>
             
                     
-                    Learning Notes
+                    Basic Image Manipulation
             
                 </span>
             
@@ -112,12 +121,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="edge_detection.md">
+        <li class="chapter " data-level="1.2.1" data-path="basic_image_manipulation/Image Noise.html">
             
-                <span>
+                <a href="basic_image_manipulation/Image Noise.html">
             
                     
-                    Edge Detection
+                    Image Noise
             
                 </a>
             
@@ -125,12 +134,51 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="hough_transform.html">
+        <li class="chapter " data-level="1.2.2" data-path="basic_image_manipulation/Filtering.html">
             
-                <a href="hough_transform.html">
+                <a href="basic_image_manipulation/Filtering.html">
             
                     
-                    Hough Transform
+                    Filtering
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="basic_image_manipulation/Linearity and Convolution.html">
+            
+                <a href="basic_image_manipulation/Linearity and Convolution.html">
+            
+                    
+                    Linearity and Convolution
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="basic_image_manipulation/Boundary Issues.html">
+            
+                <a href="basic_image_manipulation/Boundary Issues.html">
+            
+                    
+                    Boundary Issues
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="basic_image_manipulation/Filter as Templates.html">
+            
+                <a href="basic_image_manipulation/Filter as Templates.html">
+            
+                    
+                    Filters as Templates
             
                 </a>
             
@@ -143,7 +191,52 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" >
+        <li class="chapter " data-level="1.3" data-path="edge_detection.html">
+            
+                <a href="edge_detection.html">
+            
+                    
+                    Edge Detection
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="edge_detection/Gradients.html">
+            
+                <a href="edge_detection/Gradients.html">
+            
+                    
+                    Gradients
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="hough_transform.html">
+            
+                <a href="hough_transform.html">
+            
+                    
+                    Hough Transform
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
             
                 <span>
             
@@ -157,7 +250,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.3.1" data-path="ps_object_tracking.html">
+        <li class="chapter active" data-level="1.5.1" data-path="ps_object_tracking.html">
             
                 <a href="ps_object_tracking.html">
             
@@ -229,18 +322,18 @@
 <p>First we need to define the KF&#x2019;s components. We will use the notation presented in the lectures for the N-dimensional case.</p>
 <h4 id="11-state-vector">1.1 State vector</h4>
 <p>We represent the filter&#x2019;s state using the current position and velocities in the x, y plane. We will not use acceleration in our exercise.</p>
-<p>$$
-X= [x, y, v_x, v_y]</p>
-<p>$$</p>
+<p><script type="math/tex; mode=display">
+X= [x, y, v_x, v_y]
+</script></p>
 <h4 id="12-dynamics-model-transition-4x4-matrix-dt">1.2 Dynamics Model transition 4x4 matrix $D_t$</h4>
 <p>This matrix will map the equations below to the state components. Determine how this 4x4 matrix can be used to represent these equations using the state vector.</p>
-<p>$$
-D_t = \left[ \begin{array}{c} 1 &amp;0 &amp;\Delta t &amp;0 \ 
-                              0 &amp;1 &amp;0 &amp;\Delta t \
-                              0 &amp; 0 &amp; 1 &amp; 0 \
-                              0 &amp; 0 &amp; 0 &amp; 1
-                              \end{array} \right]</p>
-<p>$$
+<p><script type="math/tex; mode=display">
+D_t = \left[ \begin{array}{c} 1 &0 &\Delta t &0 \\ 
+							  0 &1 &0 &\Delta t \\
+							  0 & 0 & 1 & 0 \\
+							  0 & 0 & 0 & 1
+							  \end{array} \right]
+</script>
 so that:
 $x<em>t = x</em>{t-1} + v<em>x \Delta t $
 $y_t = y</em>{t-1} + v_y \Delta t$</p>
@@ -248,34 +341,36 @@ $y_t = y</em>{t-1} + v_y \Delta t$</p>
 <h4 id="13-state-and-covariance-prediction">1.3 State and Covariance prediction:</h4>
 <p>We assume that the state vector prediction is based on a linear transformation using the transition matrix $D_t$. And the covariance is obtained from the squaring operation plus the process noise $Q$. We will also assume this noise is independent from each component in the state vector.</p>
 <p>$X<em>t^- = X</em>{t-1}^+ D_t$</p>
-<p>$\Sigma<em>t^- = D_t \Sigma</em>{t-1}^+ D_t^T + Q$</p>
-<p>$$
+<p>$\Sigma<em>t^- = D_t \Sigma</em>{t-1}^+ D_t^T + Q$
+<script type="math/tex; mode=display">
 Q = \left[ \begin{array}{c} 
-                              \sigma<em>{d_x}^2 &amp;0 &amp;0 &amp;0 \ 
-                              0 &amp;\sigma</em>{d<em>y}^2 &amp;0 &amp;0  \
-                              0 &amp; 0 &amp; \sigma</em>{d<em>{vx}}^2 &amp; 0 \
-                              0 &amp; 0 &amp; 0 &amp; \sigma</em>{d_{vy}}^2
-                              \end{array} \right]</p>
-<p>$$
+							  \sigma_{d_x}^2 &0 &0 &0 \\ 
+							  0 &\sigma_{d_y}^2 &0 &0  \\
+							  0 & 0 & \sigma_{d_{vx}}^2 & 0 \\
+							  0 & 0 & 0 & \sigma_{d_{vy}}^2
+							  \end{array} \right]
+</script>
 Before we continue to the Correction state. We will define our sensor&#x2019;s function as a way to obtain the object&#x2019;s position. In our case we will use a template matching code to obtain these components. In order to make this a little more interesting, we will add some noise to these measurements</p>
 <h4 id="1-4-sensor-measurement-2x4-matrix-mt">1. 4 Sensor measurement 2x4 matrix $M_t$:</h4>
-<p>This matrix maps the available measurements to the state vector defined above. Because we can only obtain two values, $x$ and $y$, it contains two rows and four columns.</p>
-<p>$$
-M_t = \left[ \begin{array}{c}<br>            1 &amp;0 &amp;0 &amp;0 \<br>            0 &amp;1 &amp;0 &amp;0\end{array} \right]</p>
-<p>$$</p>
+<p>This matrix maps the available measurements to the state vector defined above. Because we can only obtain two values, $x$ and $y$, it contains two rows and four columns.
+<script type="math/tex; mode=display">
+M_t = \left[ \begin{array}{c}                               
+		    1 &0 &0 &0 \\                               
+		    0 &1 &0 &0\end{array} \right]
+</script></p>
 <h4 id="15-kalman-gain-kt">1.5 Kalman Gain $K_t$</h4>
 <p>Using the measurement matrix, and the predicted covariance we can now compute the Kalman Gain.
 Here you will also define a measurement noise represented by $\Sigma_{m_t}$</p>
-<p>Kalman gain determines how much weight should be placed on state prediction and how much on measurement update.  It is an averaging factor that depends on uncertainty of state prediction and measurement updates.</p>
-<p>$$
-K<em>t = \Sigma_t^- M_t^T(M_t \Sigma_t^- M_t^T + \Sigma</em>{m_t})^{-1}</p>
-<p>$$</p>
-<p>$$
-\Sigma<em>{m_t} =\left[ \begin{array}{c} 
-                    \sigma</em>{m<em>x}^2 &amp; 0 \
-                    0 &amp; \sigma</em>{m_y}^2
-             \end{array} \right]</p>
-<p>$$</p>
+<p>Kalman gain determines how much weight should be placed on state prediction and how much on measurement update.  It is an averaging factor that depends on uncertainty of state prediction and measurement updates.
+<script type="math/tex; mode=display">
+K_t = \Sigma_t^- M_t^T(M_t \Sigma_t^- M_t^T + \Sigma_{m_t})^{-1}
+</script></p>
+<p><script type="math/tex; mode=display">
+\Sigma_{m_t} =\left[ \begin{array}{c} 
+					\sigma_{m_x}^2 & 0 \\
+					0 & \sigma_{m_y}^2
+ 			\end{array} \right]
+</script></p>
 <h4 id="16-state-and-covariance-correction">1.6 State and Covariance Correction</h4>
 
                                 
@@ -312,7 +407,7 @@ K<em>t = \Sigma_t^- M_t^T(M_t \Sigma_t^- M_t^T + \Sigma</em>{m_t})^{-1}</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Object Tracking and Pedestrian Detection","level":"1.3.1","depth":2,"previous":{"title":"Problem Sets","level":"1.3","depth":1,"ref":"","articles":[{"title":"Object Tracking and Pedestrian Detection","level":"1.3.1","depth":2,"path":"ps_object_tracking.md","ref":"ps_object_tracking.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ps_object_tracking.md","mtime":"2021-01-12T05:04:31.868Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-12T05:05:01.456Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Object Tracking and Pedestrian Detection","level":"1.5.1","depth":2,"previous":{"title":"Problem Sets","level":"1.5","depth":1,"ref":"","articles":[{"title":"Object Tracking and Pedestrian Detection","level":"1.5.1","depth":2,"path":"ps_object_tracking.md","ref":"ps_object_tracking.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"ps_object_tracking.md","mtime":"2021-01-12T05:13:23.170Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-12T05:23:36.717Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -320,6 +415,14 @@ K<em>t = \Sigma_t^- M_t^T(M_t \Sigma_t^- M_t^T + \Sigma</em>{m_t})^{-1}</p>
         
     <script src="gitbook/gitbook.js"></script>
     <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-mathjax/plugin.js"></script>
+        
     
         
         <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
