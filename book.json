@@ -1,0 +1,11 @@
+{
+	"title": "Computer Vision Learning Notes",
+    "description": "A collection of learning notes of computer vision",
+    "author": "Shengchen Liu",
+	"links": {
+	        "sidebar": {
+	            "Home": "https://shengchen-liu.github.io/"
+	        }
+	    },
+    "plugins": ["mathjax"]
+}
