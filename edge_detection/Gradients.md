@@ -23,7 +23,7 @@ $$
 ## Finite Differences
 
 $$
-\frac{\partial f(x, y)}{x} = f(x + 1, y) - f(x, y)  
+\frac{\partial f(x, y)}{\partial x} = f(x + 1, y) - f(x, y)
 $$
 
 ## Discrete Gradient
@@ -56,4 +56,24 @@ $$
 $$
 \nabla I := \begin{bmatrix} g_x, g_y \end{bmatrix} ^T
 $$
+
+## Handling Noise
+
+The images are very noise.  To reduce the noise, we apply a smoothing filter.
+
+![image-20210112003200584](assets/image-20210112003200584.png)
+
+### Derivative Theorem of Convolution
+
+We take advantage of associative of linearity property.
+$$
+\frac{\partial}{\partial x}(h * f) = (\frac{\partial}{\partial x}h) * f
+$$
+This saves us one operation so we can calculate derivatives on the kernal
+
+![image-20210112003524405](assets/image-20210112003524405.png)
+
+### Second derivative of Gaussian
+
+![image-20210112003605338](assets/image-20210112003605338.png)
 
