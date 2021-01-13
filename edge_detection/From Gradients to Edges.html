@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Gradients · Computer Vision Learning Notes</title>
+        <title>From Gradients to Edges · Computer Vision Learning Notes</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="Two Dimensional Detection.html" />
+    <link rel="next" href="../hough_transform.html" />
     
     
-    <link rel="prev" href="../edge_detection.html" />
+    <link rel="prev" href="Two Dimensional Detection.html" />
     
 
     </head>
@@ -209,7 +209,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.3.1" data-path="Gradients.html">
+        <li class="chapter " data-level="1.3.1" data-path="Gradients.html">
             
                 <a href="Gradients.html">
             
@@ -235,7 +235,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="From Gradients to Edges.html">
+        <li class="chapter active" data-level="1.3.3" data-path="From Gradients to Edges.html">
             
                 <a href="From Gradients to Edges.html">
             
@@ -418,7 +418,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Gradients</a>
+        <a href=".." >From Gradients to Edges</a>
     </h1>
 </div>
 
@@ -433,62 +433,43 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="gradients">Gradients</h1>
-<h2 id="image-gradient-function">Image Gradient Function</h2>
-<p><script type="math/tex; mode=display">
-\nabla := \begin{bmatrix} \frac{\partial}{\partial x}, \frac{\partial}{\partial y} \end{bmatrix}
-</script></p>
-<h3 id="direction">Direction</h3>
-<p>The gradient points in the direction of most rapid increase in intensity.  For an image <script type="math/tex; ">f</script>, the gradient&apos;s direction is given by:
+                                <h1 id="from-gradients-to-edges">From Gradients to Edges</h1>
+<p> How to we get from gradient images to actual edges?</p>
+<ol>
+<li><strong>Smoothing</strong></li>
+</ol>
+<p>Suppress noise by performing smoothing on the image.</p>
+<ol>
+<li><strong>Gradient</strong></li>
+</ol>
+<p>Compute the gradient to find the areas of the image that have significant localized change.</p>
+<ol>
+<li><strong>Threshold</strong></li>
+</ol>
+<p>Aside from tweaking <script type="math/tex; ">\sigma</script>, we can also clip the gradient to some range of values to limit our edges to the &quot;significant&quot; parts of the gradient we are interested in.</p>
+<ol>
+<li><strong>Thinning &amp; Connecting</strong></li>
+</ol>
+<p>Perform thinning to get the localized edge pixels that we can work with, and connect these edge pixels to create a &quot;complete&quot; representation of the edge if desired.</p>
+<h2 id="canny-edge-operator">Canny Edge Operator</h2>
+<ol>
+<li>Filter the image with the derivative of the Gaussian</li>
+<li>Find the magnitude and orientation  of the gradient.</li>
+<li>Perform Non-Maximal Suppression, which thins the multi-pixel ridges of the gradient into a single-pixel width.</li>
+<li>Threshold and link the edges.  This is done by choosing two thresholds, low and high, and using the high threshold to start edge curves and the low one to continue them.</li>
+</ol>
+<h3 id="non-maximal-suppression">Non-Maximal Suppression</h3>
+<p>This is a fancy term for what amounts to choosing the brightest (maximal) pixel of an edge and discarding the rest (suppression).  It works by looking in the gradient direction and keeping the maximal pixel.</p>
+<p>Non-maximal suppression is a general-purpose strategy towards filtering out lower-quality results and isn&apos;t restricted to edge detection applications.</p>
+<h3 id="canary-threshold-hysteresis">Canary Threshold Hysteresis</h3>
+<p>After application of non-maximum suppression, remaining edge pixels  provide a more accurate representation of real edges in an image.  However, some edge pixels remain that are caused by noise and color  variation. In order to account for these spurious responses, it is  essential to filter out edge pixels with a weak gradient value and  preserve edge pixels with a high gradient value.  This is accomplished  by selecting high and low threshold values.  If an edge pixel&#x2019;s gradient value is higher than the high threshold value, it is marked as a strong edge pixel. If an edge pixel&#x2019;s gradient value is smaller than the high  threshold value and larger than the low threshold value, it is marked as a weak edge pixel. If an edge pixel&apos;s gradient value is smaller than  the low threshold value, it will be suppressed. The two threshold values are empirically determined and their definition will depend on the  content of a given input image.</p>
+<p>So far, the strong edge pixels should certainly be involved in the final edge image, as they are extracted from the true edges in the image.  However, there will be some debate on the weak edge pixels, as these  pixels can either be extracted from the true edge, or the noise/color  variations. To achieve an accurate result, the weak edges caused by the  latter reasons should be removed. Usually a weak edge pixel caused from  true edges will be connected to a strong edge pixel while noise  responses are unconnected.  To track the edge connection, <a href="https://en.wikipedia.org/wiki/Connected-component_labeling" target="_blank">blob analysis</a> is applied by looking at a weak edge pixel and its 8-connected  neighborhood pixels. As long as there is one strong edge pixel that is  involved in the blob, that weak edge point can be identified as one that should be preserved.</p>
+<h2 id="2nd-order-gaussian-in-2d"><script type="math/tex; ">2^{nd}</script> Order Gaussian in 2D</h2>
+<p><strong>Laplacian operator</strong>:
 <script type="math/tex; mode=display">
-\theta = \tan ^{-1}(\frac{\partial f}{\partial y} / \frac{\partial f}{\partial x} )
-</script></p>
-<h3 id="magnitude">Magnitude</h3>
-<p>The &quot;amount of change&quot; in the gradient is given by its magnitude:
-<script type="math/tex; mode=display">
-||\nabla f|| = \sqrt{(\frac{\partial f}{\partial x})^2 + (\frac{\partial f}{\partial y} )^2}
-</script></p>
-<h2 id="finite-differences">Finite Differences</h2>
-<p><script type="math/tex; mode=display">
-\frac{\partial f(x, y)}{\partial x} = f(x + 1, y) - f(x, y)
-</script></p>
-<h2 id="discrete-gradient">Discrete Gradient</h2>
-<p>We want an operator that we can apply to a kernel and use as a correlation (or convolution) filter.
-<script type="math/tex; mode=display">
-H := \begin{bmatrix} 0 & 0 & 0 \\
-					-1/2 & 0 & 1/2 \\
-                    0 & 0 & 0
-\end{bmatrix}
-</script></p>
-<h3 id="sobel-operator">Sobel Operator</h3>
-<p>The Sobel Operator is a discrete gradient operator that preserves the &quot;neighborliness&quot; of an image that we discussed earlier when talking about the Gaussian blur filter in Blurring Images.  It looks like this:
-<script type="math/tex; mode=display">
-S_x := \frac{1}{8} \begin{bmatrix} -1 & 0 & 1 \\
-					-2 & 0 & 2 \\
-                    -1 & 0 & 1
-\end{bmatrix}
-</script></p>
-<p><script type="math/tex; mode=display">
-S_y := \frac{1}{8} \begin{bmatrix} 1 & 2 & 1 \\
-					-0 & 0 & 0 \\
-                    -1 & -2 & -1
-\end{bmatrix}
-</script></p>
-<p><script type="math/tex; mode=display">
-\nabla I := \begin{bmatrix} g_x, g_y \end{bmatrix} ^T
-</script></p>
-<h2 id="handling-noise">Handling Noise</h2>
-<p>The images are very noise.  To reduce the noise, we apply a smoothing filter.</p>
-<p><img src="assets/image-20210112003200584.png" alt="image-20210112003200584"></p>
-<h3 id="derivative-theorem-of-convolution">Derivative Theorem of Convolution</h3>
-<p>We take advantage of associative of linearity property.
-<script type="math/tex; mode=display">
-\frac{\partial}{\partial x}(h * f) = (\frac{\partial}{\partial x}h) * f
+\nabla ^2 f = \frac{\partial ^2 f}{\partial x^2} + \frac{\partial ^2 f}{\partial y^2}
 </script>
-This saves us one operation so we can calculate derivatives on the kernal</p>
-<p><img src="assets/image-20210112003524405.png" alt="image-20210112003524405"></p>
-<h3 id="second-derivative-of-gaussian">Second derivative of Gaussian</h3>
-<p><img src="assets/image-20210112003605338.png" alt="image-20210112003605338"></p>
+Once you apply the Laplacian, the zero-corssings are the edges of the image.</p>
 
                                 
                                 </section>
@@ -516,12 +497,12 @@ This saves us one operation so we can calculate derivatives on the kernal</p>
 
             
                 
-                <a href="../edge_detection.html" class="navigation navigation-prev " aria-label="Previous page: Edge Detection">
+                <a href="Two Dimensional Detection.html" class="navigation navigation-prev " aria-label="Previous page: Two Dimensional Detection">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="Two Dimensional Detection.html" class="navigation navigation-next " aria-label="Next page: Two Dimensional Detection">
+                <a href="../hough_transform.html" class="navigation navigation-next " aria-label="Next page: Hough Transform">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -532,7 +513,7 @@ This saves us one operation so we can calculate derivatives on the kernal</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Gradients","level":"1.3.1","depth":2,"next":{"title":"Two Dimensional Detection","level":"1.3.2","depth":2,"path":"edge_detection/Two Dimensional Detection.md","ref":"edge_detection/Two Dimensional Detection.md","articles":[]},"previous":{"title":"Edge Detection","level":"1.3","depth":1,"path":"edge_detection.md","ref":"edge_detection.md","articles":[{"title":"Gradients","level":"1.3.1","depth":2,"path":"edge_detection/Gradients.md","ref":"edge_detection/Gradients.md","articles":[]},{"title":"Two Dimensional Detection","level":"1.3.2","depth":2,"path":"edge_detection/Two Dimensional Detection.md","ref":"edge_detection/Two Dimensional Detection.md","articles":[]},{"title":"From Gradients to Edges","level":"1.3.3","depth":2,"path":"edge_detection/From Gradients to Edges.md","ref":"edge_detection/From Gradients to Edges.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"edge_detection/Gradients.md","mtime":"2021-01-12T05:44:13.255Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-13T03:55:53.692Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"From Gradients to Edges","level":"1.3.3","depth":2,"next":{"title":"Hough Transform","level":"1.4","depth":1,"path":"hough_transform.md","ref":"hough_transform.md","articles":[{"title":"Line Fitting","level":"1.4.1","depth":2,"path":"hough transform/Line Fitting.md","ref":"hough transform/Line Fitting.md","articles":[{"title":"Voting","level":"1.4.1.1","depth":3,"path":"hough transform/Voting.md","ref":"hough transform/Voting.md","articles":[]},{"title":"Hough Transform","level":"1.4.1.2","depth":3,"path":"hough transform/Hough Transform.md","ref":"hough transform/Hough Transform.md","articles":[]},{"title":"Polar Representation of Lines","level":"1.4.1.3","depth":3,"path":"hough transform/Polar Representation of Lines.md","ref":"hough transform/Polar Representation of Lines.md","articles":[]},{"title":"Hough Algorithm","level":"1.4.1.4","depth":3,"path":"hough transform/Hough Algorithm.md","ref":"hough transform/Hough Algorithm.md","articles":[]},{"title":"Extensions - Using the Gradient","level":"1.4.1.5","depth":3,"path":"hough transform/Extensions.md","ref":"hough transform/Extensions.md","articles":[]}]}]},"previous":{"title":"Two Dimensional Detection","level":"1.3.2","depth":2,"path":"edge_detection/Two Dimensional Detection.md","ref":"edge_detection/Two Dimensional Detection.md","articles":[]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"edge_detection/From Gradients to Edges.md","mtime":"2021-01-13T01:34:05.493Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-13T03:55:53.692Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

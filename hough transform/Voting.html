@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Gradients · Computer Vision Learning Notes</title>
+        <title>Voting · Computer Vision Learning Notes</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="Two Dimensional Detection.html" />
+    <link rel="next" href="Hough Transform.html" />
     
     
-    <link rel="prev" href="../edge_detection.html" />
+    <link rel="prev" href="Line Fitting.html" />
     
 
     </head>
@@ -209,9 +209,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.3.1" data-path="Gradients.html">
+        <li class="chapter " data-level="1.3.1" data-path="../edge_detection/Gradients.html">
             
-                <a href="Gradients.html">
+                <a href="../edge_detection/Gradients.html">
             
                     
                     Gradients
@@ -222,9 +222,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="Two Dimensional Detection.html">
+        <li class="chapter " data-level="1.3.2" data-path="../edge_detection/Two Dimensional Detection.html">
             
-                <a href="Two Dimensional Detection.html">
+                <a href="../edge_detection/Two Dimensional Detection.html">
             
                     
                     Two Dimensional Detection
@@ -235,9 +235,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="From Gradients to Edges.html">
+        <li class="chapter " data-level="1.3.3" data-path="../edge_detection/From Gradients to Edges.html">
             
-                <a href="From Gradients to Edges.html">
+                <a href="../edge_detection/From Gradients to Edges.html">
             
                     
                     From Gradients to Edges
@@ -267,9 +267,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../hough transform/Line Fitting.html">
+        <li class="chapter " data-level="1.4.1" data-path="Line Fitting.html">
             
-                <a href="../hough transform/Line Fitting.html">
+                <a href="Line Fitting.html">
             
                     
                     Line Fitting
@@ -281,9 +281,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1.1" data-path="../hough transform/Voting.html">
+        <li class="chapter active" data-level="1.4.1.1" data-path="Voting.html">
             
-                <a href="../hough transform/Voting.html">
+                <a href="Voting.html">
             
                     
                     Voting
@@ -294,9 +294,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.1.2" data-path="../hough transform/Hough Transform.html">
+        <li class="chapter " data-level="1.4.1.2" data-path="Hough Transform.html">
             
-                <a href="../hough transform/Hough Transform.html">
+                <a href="Hough Transform.html">
             
                     
                     Hough Transform
@@ -307,9 +307,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.1.3" data-path="../hough transform/Polar Representation of Lines.html">
+        <li class="chapter " data-level="1.4.1.3" data-path="Polar Representation of Lines.html">
             
-                <a href="../hough transform/Polar Representation of Lines.html">
+                <a href="Polar Representation of Lines.html">
             
                     
                     Polar Representation of Lines
@@ -320,9 +320,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.1.4" data-path="../hough transform/Hough Algorithm.html">
+        <li class="chapter " data-level="1.4.1.4" data-path="Hough Algorithm.html">
             
-                <a href="../hough transform/Hough Algorithm.html">
+                <a href="Hough Algorithm.html">
             
                     
                     Hough Algorithm
@@ -333,9 +333,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.1.5" data-path="../hough transform/Extensions.html">
+        <li class="chapter " data-level="1.4.1.5" data-path="Extensions.html">
             
-                <a href="../hough transform/Extensions.html">
+                <a href="Extensions.html">
             
                     
                     Extensions - Using the Gradient
@@ -418,7 +418,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Gradients</a>
+        <a href=".." >Voting</a>
     </h1>
 </div>
 
@@ -433,62 +433,17 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="gradients">Gradients</h1>
-<h2 id="image-gradient-function">Image Gradient Function</h2>
-<p><script type="math/tex; mode=display">
-\nabla := \begin{bmatrix} \frac{\partial}{\partial x}, \frac{\partial}{\partial y} \end{bmatrix}
-</script></p>
-<h3 id="direction">Direction</h3>
-<p>The gradient points in the direction of most rapid increase in intensity.  For an image <script type="math/tex; ">f</script>, the gradient&apos;s direction is given by:
-<script type="math/tex; mode=display">
-\theta = \tan ^{-1}(\frac{\partial f}{\partial y} / \frac{\partial f}{\partial x} )
-</script></p>
-<h3 id="magnitude">Magnitude</h3>
-<p>The &quot;amount of change&quot; in the gradient is given by its magnitude:
-<script type="math/tex; mode=display">
-||\nabla f|| = \sqrt{(\frac{\partial f}{\partial x})^2 + (\frac{\partial f}{\partial y} )^2}
-</script></p>
-<h2 id="finite-differences">Finite Differences</h2>
-<p><script type="math/tex; mode=display">
-\frac{\partial f(x, y)}{\partial x} = f(x + 1, y) - f(x, y)
-</script></p>
-<h2 id="discrete-gradient">Discrete Gradient</h2>
-<p>We want an operator that we can apply to a kernel and use as a correlation (or convolution) filter.
-<script type="math/tex; mode=display">
-H := \begin{bmatrix} 0 & 0 & 0 \\
-					-1/2 & 0 & 1/2 \\
-                    0 & 0 & 0
-\end{bmatrix}
-</script></p>
-<h3 id="sobel-operator">Sobel Operator</h3>
-<p>The Sobel Operator is a discrete gradient operator that preserves the &quot;neighborliness&quot; of an image that we discussed earlier when talking about the Gaussian blur filter in Blurring Images.  It looks like this:
-<script type="math/tex; mode=display">
-S_x := \frac{1}{8} \begin{bmatrix} -1 & 0 & 1 \\
-					-2 & 0 & 2 \\
-                    -1 & 0 & 1
-\end{bmatrix}
-</script></p>
-<p><script type="math/tex; mode=display">
-S_y := \frac{1}{8} \begin{bmatrix} 1 & 2 & 1 \\
-					-0 & 0 & 0 \\
-                    -1 & -2 & -1
-\end{bmatrix}
-</script></p>
-<p><script type="math/tex; mode=display">
-\nabla I := \begin{bmatrix} g_x, g_y \end{bmatrix} ^T
-</script></p>
-<h2 id="handling-noise">Handling Noise</h2>
-<p>The images are very noise.  To reduce the noise, we apply a smoothing filter.</p>
-<p><img src="assets/image-20210112003200584.png" alt="image-20210112003200584"></p>
-<h3 id="derivative-theorem-of-convolution">Derivative Theorem of Convolution</h3>
-<p>We take advantage of associative of linearity property.
-<script type="math/tex; mode=display">
-\frac{\partial}{\partial x}(h * f) = (\frac{\partial}{\partial x}h) * f
-</script>
-This saves us one operation so we can calculate derivatives on the kernal</p>
-<p><img src="assets/image-20210112003524405.png" alt="image-20210112003524405"></p>
-<h3 id="second-derivative-of-gaussian">Second derivative of Gaussian</h3>
-<p><img src="assets/image-20210112003605338.png" alt="image-20210112003605338"></p>
+                                <h1 id="voting">Voting</h1>
+<p>It is computationally infeasible to simply try every possible line given a set of edge pixels, in stead, we need to let the data tell us something.  <strong>Voting</strong> is a general technique where we let the features (edge pixels) vote for all the models with which the are compatible.</p>
+<ol>
+<li>Cycle through features, each casting votes for model parameters.</li>
+<li>Look for model parameters that receive a lot of votes.</li>
+</ol>
+<h2 id="voting---why-it-works">Voting - Why it works</h2>
+<ol>
+<li>Noise &amp; clutter features will cast votes too, but typically their votes should be inconsistent with the majority of &#x201C;good&#x201D; features.</li>
+<li>Ok if some features not observed, as model can span multiple fragments.</li>
+</ol>
 
                                 
                                 </section>
@@ -516,12 +471,12 @@ This saves us one operation so we can calculate derivatives on the kernal</p>
 
             
                 
-                <a href="../edge_detection.html" class="navigation navigation-prev " aria-label="Previous page: Edge Detection">
+                <a href="Line Fitting.html" class="navigation navigation-prev " aria-label="Previous page: Line Fitting">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="Two Dimensional Detection.html" class="navigation navigation-next " aria-label="Next page: Two Dimensional Detection">
+                <a href="Hough Transform.html" class="navigation navigation-next " aria-label="Next page: Hough Transform">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -532,7 +487,7 @@ This saves us one operation so we can calculate derivatives on the kernal</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Gradients","level":"1.3.1","depth":2,"next":{"title":"Two Dimensional Detection","level":"1.3.2","depth":2,"path":"edge_detection/Two Dimensional Detection.md","ref":"edge_detection/Two Dimensional Detection.md","articles":[]},"previous":{"title":"Edge Detection","level":"1.3","depth":1,"path":"edge_detection.md","ref":"edge_detection.md","articles":[{"title":"Gradients","level":"1.3.1","depth":2,"path":"edge_detection/Gradients.md","ref":"edge_detection/Gradients.md","articles":[]},{"title":"Two Dimensional Detection","level":"1.3.2","depth":2,"path":"edge_detection/Two Dimensional Detection.md","ref":"edge_detection/Two Dimensional Detection.md","articles":[]},{"title":"From Gradients to Edges","level":"1.3.3","depth":2,"path":"edge_detection/From Gradients to Edges.md","ref":"edge_detection/From Gradients to Edges.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"edge_detection/Gradients.md","mtime":"2021-01-12T05:44:13.255Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-13T03:55:53.692Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Voting","level":"1.4.1.1","depth":3,"next":{"title":"Hough Transform","level":"1.4.1.2","depth":3,"path":"hough transform/Hough Transform.md","ref":"hough transform/Hough Transform.md","articles":[]},"previous":{"title":"Line Fitting","level":"1.4.1","depth":2,"path":"hough transform/Line Fitting.md","ref":"hough transform/Line Fitting.md","articles":[{"title":"Voting","level":"1.4.1.1","depth":3,"path":"hough transform/Voting.md","ref":"hough transform/Voting.md","articles":[]},{"title":"Hough Transform","level":"1.4.1.2","depth":3,"path":"hough transform/Hough Transform.md","ref":"hough transform/Hough Transform.md","articles":[]},{"title":"Polar Representation of Lines","level":"1.4.1.3","depth":3,"path":"hough transform/Polar Representation of Lines.md","ref":"hough transform/Polar Representation of Lines.md","articles":[]},{"title":"Hough Algorithm","level":"1.4.1.4","depth":3,"path":"hough transform/Hough Algorithm.md","ref":"hough transform/Hough Algorithm.md","articles":[]},{"title":"Extensions - Using the Gradient","level":"1.4.1.5","depth":3,"path":"hough transform/Extensions.md","ref":"hough transform/Extensions.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"hough transform/Voting.md","mtime":"2021-01-13T03:10:44.896Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-13T03:55:53.692Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

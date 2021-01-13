@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · Computer Vision Learning Notes</title>
+        <title>Hough Algorithm · Computer Vision Learning Notes</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -12,20 +12,20 @@
         
         
     
-    <link rel="stylesheet" href="gitbook/style.css">
+    <link rel="stylesheet" href="../gitbook/style.css">
 
     
             
                 
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
                 
             
                 
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
                 
             
                 
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
                 
             
         
@@ -53,10 +53,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="Extensions.html" />
+    
+    
+    <link rel="prev" href="Polar Representation of Lines.html" />
     
 
     </head>
@@ -94,9 +98,9 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="../">
             
-                <a href="./">
+                <a href="../">
             
                     
                     Introduction
@@ -121,9 +125,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="basic_image_manipulation/Image Noise.html">
+        <li class="chapter " data-level="1.2.1" data-path="../basic_image_manipulation/Image Noise.html">
             
-                <a href="basic_image_manipulation/Image Noise.html">
+                <a href="../basic_image_manipulation/Image Noise.html">
             
                     
                     Image Noise
@@ -134,9 +138,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="basic_image_manipulation/Filtering.html">
+        <li class="chapter " data-level="1.2.2" data-path="../basic_image_manipulation/Filtering.html">
             
-                <a href="basic_image_manipulation/Filtering.html">
+                <a href="../basic_image_manipulation/Filtering.html">
             
                     
                     Filtering
@@ -147,9 +151,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="basic_image_manipulation/Linearity and Convolution.html">
+        <li class="chapter " data-level="1.2.3" data-path="../basic_image_manipulation/Linearity and Convolution.html">
             
-                <a href="basic_image_manipulation/Linearity and Convolution.html">
+                <a href="../basic_image_manipulation/Linearity and Convolution.html">
             
                     
                     Linearity and Convolution
@@ -160,9 +164,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.4" data-path="basic_image_manipulation/Boundary Issues.html">
+        <li class="chapter " data-level="1.2.4" data-path="../basic_image_manipulation/Boundary Issues.html">
             
-                <a href="basic_image_manipulation/Boundary Issues.html">
+                <a href="../basic_image_manipulation/Boundary Issues.html">
             
                     
                     Boundary Issues
@@ -173,9 +177,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5" data-path="basic_image_manipulation/Filter as Templates.html">
+        <li class="chapter " data-level="1.2.5" data-path="../basic_image_manipulation/Filter as Templates.html">
             
-                <a href="basic_image_manipulation/Filter as Templates.html">
+                <a href="../basic_image_manipulation/Filter as Templates.html">
             
                     
                     Filters as Templates
@@ -191,9 +195,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="edge_detection.html">
+        <li class="chapter " data-level="1.3" data-path="../edge_detection.html">
             
-                <a href="edge_detection.html">
+                <a href="../edge_detection.html">
             
                     
                     Edge Detection
@@ -205,9 +209,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="edge_detection/Gradients.html">
+        <li class="chapter " data-level="1.3.1" data-path="../edge_detection/Gradients.html">
             
-                <a href="edge_detection/Gradients.html">
+                <a href="../edge_detection/Gradients.html">
             
                     
                     Gradients
@@ -218,9 +222,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="edge_detection/Two Dimensional Detection.html">
+        <li class="chapter " data-level="1.3.2" data-path="../edge_detection/Two Dimensional Detection.html">
             
-                <a href="edge_detection/Two Dimensional Detection.html">
+                <a href="../edge_detection/Two Dimensional Detection.html">
             
                     
                     Two Dimensional Detection
@@ -231,9 +235,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="edge_detection/From Gradients to Edges.html">
+        <li class="chapter " data-level="1.3.3" data-path="../edge_detection/From Gradients to Edges.html">
             
-                <a href="edge_detection/From Gradients to Edges.html">
+                <a href="../edge_detection/From Gradients to Edges.html">
             
                     
                     From Gradients to Edges
@@ -249,9 +253,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="hough_transform.html">
+        <li class="chapter " data-level="1.4" data-path="../hough_transform.html">
             
-                <a href="hough_transform.html">
+                <a href="../hough_transform.html">
             
                     
                     Hough Transform
@@ -263,9 +267,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="hough transform/Line Fitting.html">
+        <li class="chapter " data-level="1.4.1" data-path="Line Fitting.html">
             
-                <a href="hough transform/Line Fitting.html">
+                <a href="Line Fitting.html">
             
                     
                     Line Fitting
@@ -277,9 +281,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1.1" data-path="hough transform/Voting.html">
+        <li class="chapter " data-level="1.4.1.1" data-path="Voting.html">
             
-                <a href="hough transform/Voting.html">
+                <a href="Voting.html">
             
                     
                     Voting
@@ -290,9 +294,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.1.2" data-path="hough transform/Hough Transform.html">
+        <li class="chapter " data-level="1.4.1.2" data-path="Hough Transform.html">
             
-                <a href="hough transform/Hough Transform.html">
+                <a href="Hough Transform.html">
             
                     
                     Hough Transform
@@ -303,9 +307,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.1.3" data-path="hough transform/Polar Representation of Lines.html">
+        <li class="chapter " data-level="1.4.1.3" data-path="Polar Representation of Lines.html">
             
-                <a href="hough transform/Polar Representation of Lines.html">
+                <a href="Polar Representation of Lines.html">
             
                     
                     Polar Representation of Lines
@@ -316,9 +320,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.1.4" data-path="hough transform/Hough Algorithm.html">
+        <li class="chapter active" data-level="1.4.1.4" data-path="Hough Algorithm.html">
             
-                <a href="hough transform/Hough Algorithm.html">
+                <a href="Hough Algorithm.html">
             
                     
                     Hough Algorithm
@@ -329,9 +333,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.1.5" data-path="hough transform/Extensions.html">
+        <li class="chapter " data-level="1.4.1.5" data-path="Extensions.html">
             
-                <a href="hough transform/Extensions.html">
+                <a href="Extensions.html">
             
                     
                     Extensions - Using the Gradient
@@ -366,9 +370,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.5.1" data-path="ps_object_tracking.html">
+        <li class="chapter " data-level="1.5.1" data-path="../ps_object_tracking.html">
             
-                <a href="ps_object_tracking.html">
+                <a href="../ps_object_tracking.html">
             
                     
                     Object Tracking and Pedestrian Detection
@@ -414,7 +418,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href=".." >Hough Algorithm</a>
     </h1>
 </div>
 
@@ -429,11 +433,18 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="computer-vision-learning-notes">Computer Vision Learning Notes</h1>
-<p><strong>This is a collection of my learning notes of Computer Vision</strong></p>
-<h2 id="learning-notes">Learning Notes</h2>
-<h2 id="problem-sets">Problem sets</h2>
-<h3 id="object-tracking-and-pedestrian-detection"><a href="ps_object_tracking.html">Object Tracking and Pedestrian Detection</a></h3>
+                                <h1 id="hough-algorithm">Hough Algorithm</h1>
+<h2 id="pseudo-code">Pseudo Code</h2>
+<pre><code>Initialize H[d, theta] = 0
+For each edge point in E(x, y) in the image
+    for theta = -90 to 90
+        d = x * cos(theta) + y * sin(theta)
+        H[d, theta] += 1
+Find the value(s) of (d, theta) of (d, theta) where H[d, theta] is maximum
+The detected line in the image is gvien by d = x * cos(theta) + y * sin(theta)
+</code></pre><h2 id="complexity-of-the-hough-transform">Complexity of the Hough Transform</h2>
+<p><strong>Space</strong>: <script type="math/tex; ">k^n</script> (n dimensions, k bins each)</p>
+<p><strong>Time</strong>: linearly proportional to the number of edge points, whereases the voting itself is constant.</p>
 
                                 
                                 </section>
@@ -461,6 +472,14 @@
 
             
                 
+                <a href="Polar Representation of Lines.html" class="navigation navigation-prev " aria-label="Previous page: Polar Representation of Lines">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Extensions.html" class="navigation navigation-next " aria-label="Next page: Extensions - Using the Gradient">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -469,45 +488,45 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Basic Image Manipulation","level":"1.2","depth":1,"ref":"","articles":[{"title":"Image Noise","level":"1.2.1","depth":2,"path":"basic_image_manipulation/Image Noise.md","ref":"basic_image_manipulation/Image Noise.md","articles":[]},{"title":"Filtering","level":"1.2.2","depth":2,"path":"basic_image_manipulation/Filtering.md","ref":"basic_image_manipulation/Filtering.md","articles":[]},{"title":"Linearity and Convolution","level":"1.2.3","depth":2,"path":"basic_image_manipulation/Linearity and Convolution.md","ref":"basic_image_manipulation/Linearity and Convolution.md","articles":[]},{"title":"Boundary Issues","level":"1.2.4","depth":2,"path":"basic_image_manipulation/Boundary Issues.md","ref":"basic_image_manipulation/Boundary Issues.md","articles":[]},{"title":"Filters as Templates","level":"1.2.5","depth":2,"path":"basic_image_manipulation/Filter as Templates.md","ref":"basic_image_manipulation/Filter as Templates.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"README.md","mtime":"2021-01-12T05:13:23.166Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-13T03:55:53.692Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Hough Algorithm","level":"1.4.1.4","depth":3,"next":{"title":"Extensions - Using the Gradient","level":"1.4.1.5","depth":3,"path":"hough transform/Extensions.md","ref":"hough transform/Extensions.md","articles":[]},"previous":{"title":"Polar Representation of Lines","level":"1.4.1.3","depth":3,"path":"hough transform/Polar Representation of Lines.md","ref":"hough transform/Polar Representation of Lines.md","articles":[]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"hough transform/Hough Algorithm.md","mtime":"2021-01-13T03:42:41.561Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-13T03:55:53.692Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
 
         
-    <script src="gitbook/gitbook.js"></script>
-    <script src="gitbook/theme.js"></script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
     
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         
     
         
-        <script src="gitbook/gitbook-plugin-mathjax/plugin.js"></script>
+        <script src="../gitbook/gitbook-plugin-mathjax/plugin.js"></script>
         
     
         
-        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
         
     
         
-        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
         
     
         
-        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
         
     
         
-        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
         
     
         
-        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
         
     
         
-        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
         
     
 
