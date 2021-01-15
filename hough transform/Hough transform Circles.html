@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Line Fitting · Computer Vision Learning Notes</title>
+        <title>Finding Circles · Computer Vision Learning Notes</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="Voting.html" />
+    <link rel="next" href="Generalization.html" />
     
     
-    <link rel="prev" href="../hough_transform.html" />
+    <link rel="prev" href="Extensions.html" />
     
 
     </head>
@@ -267,7 +267,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.4.1" data-path="Line Fitting.html">
+        <li class="chapter " data-level="1.4.1" data-path="Line Fitting.html">
             
                 <a href="Line Fitting.html">
             
@@ -351,7 +351,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2" data-path="Hough transform Circles.html">
+        <li class="chapter active" data-level="1.4.2" data-path="Hough transform Circles.html">
             
                 <a href="Hough transform Circles.html">
             
@@ -457,7 +457,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Line Fitting</a>
+        <a href=".." >Finding Circles</a>
     </h1>
 </div>
 
@@ -472,12 +472,34 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="line-fitting">Line Fitting</h1>
-<h2 id="difficulty-of-line-fitting">Difficulty of Line Fitting</h2>
-<p><strong>Clutter</strong>: There are a lot of resulting points and edges that clutter the image and don&apos;t necessarily represent lines.</p>
-<p><strong>Partial Matches</strong>: Even with the clever hysteresis that extends and connects edges in the Canny Edge Operator, the edges that we find won&apos;t always represent the entire line represent in the original image.</p>
-<p><strong>Noise</strong>: Even without the above imperfections, the resulting edges are noisy.  Even if the original image has a perfectly straight line, the detected edge might not be straight: it may deviate a few pixels in  some directions, be slightly rotated, ore have some extra noise from other extraneous image details like texture.</p>
-
+                                <h1 id="hough-transform-circles">Hough transform: Circles</h1>
+<h2 id="circle">Circle</h2>
+<p><script type="math/tex; mode=display">
+(x - a)^2 + (y - b)^2 = r^2
+</script></p>
+<h3 id="radius-is-known">Radius is known</h3>
+<p>A point in image space on a circle is a circle in Hough space. Thus, each point on the not-yet-defined circle votes for a set of points surrounding that same location in Hough space at the known radius.</p>
+<p><img src="assets/image-20210114183946705.png" alt="image-20210114183946705"></p>
+<h3 id="radius-is-unknown">Radius is unknown</h3>
+<h4 id="no-gradient">No gradient</h4>
+<p>Each point on the circle in image space votes on a set of values in Hough space resembling a <strong>cone</strong>.</p>
+<p><img src="assets/image-20210114184355625.png" alt="image-20210114184355625"></p>
+<h4 id="with-gradient">With gradient</h4>
+<p>We can overcome this growth problem by taking advantage of the  gradient, much like we did in the Extensions for the Hough algorithm to reduce the range of <script type="math/tex; ">\theta</script>.  We can visualize the gradient as being a tangent line of the circle: if we know the radius, a single point and its tangent line would be enough to define the circle.  Since we don&apos;t, there&apos;s a line of possible values for the center.  As we see in this figure, where the blue circle is the circle defined for a specific radius given the green point and its gradient direction.  The red line defines the range of possible locations for the center of the circle if we don&apos;t know the radius.</p>
+<p>With each point in image space now defining a line of votes in Hough space, we&apos;ve drastically improved the computational complexity of voting process despite increasing the dimension.</p>
+<p><img src="assets/image-20210114184840452.png" alt="image-20210114184840452"></p>
+<h2 id="algorithm">Algorithm</h2>
+<pre><code>For every edge pixel (x,y) :
+    For each possible radius value r:
+        For each possible gradient direction &#x3B8;:
+            %% or use estimated gradient
+                a = x &#x2013; r cos(&#x3B8;)
+                b = y + r sin(&#x3B8;)
+                H[a,b,r] += 1
+        end
+    end
+end
+</code></pre>
                                 
                                 </section>
                             
@@ -504,12 +526,12 @@
 
             
                 
-                <a href="../hough_transform.html" class="navigation navigation-prev " aria-label="Previous page: Hough Transform">
+                <a href="Extensions.html" class="navigation navigation-prev " aria-label="Previous page: Extensions - Using the Gradient">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="Voting.html" class="navigation navigation-next " aria-label="Next page: Voting">
+                <a href="Generalization.html" class="navigation navigation-next " aria-label="Next page: Generalization - Hough Table">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -520,7 +542,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Line Fitting","level":"1.4.1","depth":2,"next":{"title":"Voting","level":"1.4.1.1","depth":3,"path":"hough transform/Voting.md","ref":"hough transform/Voting.md","articles":[]},"previous":{"title":"Hough Transform","level":"1.4","depth":1,"path":"hough_transform.md","ref":"hough_transform.md","articles":[{"title":"Line Fitting","level":"1.4.1","depth":2,"path":"hough transform/Line Fitting.md","ref":"hough transform/Line Fitting.md","articles":[{"title":"Voting","level":"1.4.1.1","depth":3,"path":"hough transform/Voting.md","ref":"hough transform/Voting.md","articles":[]},{"title":"Hough Transform","level":"1.4.1.2","depth":3,"path":"hough transform/Hough Transform.md","ref":"hough transform/Hough Transform.md","articles":[]},{"title":"Polar Representation of Lines","level":"1.4.1.3","depth":3,"path":"hough transform/Polar Representation of Lines.md","ref":"hough transform/Polar Representation of Lines.md","articles":[]},{"title":"Hough Algorithm","level":"1.4.1.4","depth":3,"path":"hough transform/Hough Algorithm.md","ref":"hough transform/Hough Algorithm.md","articles":[]},{"title":"Extensions - Using the Gradient","level":"1.4.1.5","depth":3,"path":"hough transform/Extensions.md","ref":"hough transform/Extensions.md","articles":[]}]},{"title":"Finding Circles","level":"1.4.2","depth":2,"path":"hough transform/Hough transform Circles.md","ref":"hough transform/Hough transform Circles.md","articles":[]},{"title":"Generalization - Hough Table","level":"1.4.3","depth":2,"path":"hough transform/Generalization.md","ref":"hough transform/Generalization.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"hough transform/Line Fitting.md","mtime":"2021-01-13T03:56:00.960Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-15T05:09:07.518Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Finding Circles","level":"1.4.2","depth":2,"next":{"title":"Generalization - Hough Table","level":"1.4.3","depth":2,"path":"hough transform/Generalization.md","ref":"hough transform/Generalization.md","articles":[]},"previous":{"title":"Extensions - Using the Gradient","level":"1.4.1.5","depth":3,"path":"hough transform/Extensions.md","ref":"hough transform/Extensions.md","articles":[]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"hough transform/Hough transform Circles.md","mtime":"2021-01-14T23:50:22.174Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-15T05:09:07.518Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

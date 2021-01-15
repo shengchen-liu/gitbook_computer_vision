@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Line Fitting · Computer Vision Learning Notes</title>
+        <title>Generalization - Hough Table · Computer Vision Learning Notes</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="Voting.html" />
     
-    
-    <link rel="prev" href="../hough_transform.html" />
+    <link rel="prev" href="Hough transform Circles.html" />
     
 
     </head>
@@ -267,7 +265,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.4.1" data-path="Line Fitting.html">
+        <li class="chapter " data-level="1.4.1" data-path="Line Fitting.html">
             
                 <a href="Line Fitting.html">
             
@@ -364,7 +362,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="Generalization.html">
+        <li class="chapter active" data-level="1.4.3" data-path="Generalization.html">
             
                 <a href="Generalization.html">
             
@@ -457,7 +455,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Line Fitting</a>
+        <a href=".." >Generalization - Hough Table</a>
     </h1>
 </div>
 
@@ -472,11 +470,61 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="line-fitting">Line Fitting</h1>
-<h2 id="difficulty-of-line-fitting">Difficulty of Line Fitting</h2>
-<p><strong>Clutter</strong>: There are a lot of resulting points and edges that clutter the image and don&apos;t necessarily represent lines.</p>
-<p><strong>Partial Matches</strong>: Even with the clever hysteresis that extends and connects edges in the Canny Edge Operator, the edges that we find won&apos;t always represent the entire line represent in the original image.</p>
-<p><strong>Noise</strong>: Even without the above imperfections, the resulting edges are noisy.  Even if the original image has a perfectly straight line, the detected edge might not be straight: it may deviate a few pixels in  some directions, be slightly rotated, ore have some extra noise from other extraneous image details like texture.</p>
+                                <h1 id="generalization---hough-table">Generalization - Hough Table</h1>
+<p><strong>Non-analytic model</strong></p>
+<p>Parameters express variation in pose or scale fixed but arbitrary shape (fixed parameters like circles with radius r).  (out-dated)</p>
+<p><strong>Visual code-words</strong> based features</p>
+<p>Not edges but detected templates learned from models (this is &#x201C;now&#x201D;)</p>
+<p>Previously, we know how to vote given a particular pixel because we had solve the equation for the shape.  For an arbitrary shape, we instead determine how to vote by building a <strong>Hough Table</strong></p>
+<h2 id="hough-table">Hough Table</h2>
+<p><strong>A Hough Table stores displacement vectors for a particular gradient angle <script type="math/tex; ">\theta</script>.</strong></p>
+<p><img src="assets/image-20210114190521413.png" alt="image-20210114190521413"></p>
+<h3 id="training-build-a-hough-table">Training: build a Hough Table</h3>
+<ol>
+<li>At each boundary point, compute displacement vector: <script type="math/tex; ">r =  c - p_i</script></li>
+<li>Measure the gradient angle <script type="math/tex; ">\theta</script> at the boundary point.</li>
+<li>Store that displacement in a table indexed by <script type="math/tex; ">\theta</script></li>
+</ol>
+<h3 id="recognition">Recognition</h3>
+<ol>
+<li>At each boundary point, measure the gradient angle <script type="math/tex; ">\theta</script></li>
+<li>Look up all displacements in <script type="math/tex; ">\theta</script> displacement table.</li>
+<li>Vote for a center at each displacement.</li>
+</ol>
+<p><img src="assets/image-20210114191925546.png" alt="image-20210114191925546"></p>
+<h2 id="algorithm">Algorithm</h2>
+<h3 id="orientation-is-known">Orientation is known</h3>
+<pre><code>For each edge point
+    Compute gradient direction &#x3B8;
+    Retrieve displacement vectors r to vote for reference point.
+Peak in this Hough space (X,Y) is reference point with most supporting edges
+</code></pre><h3 id="orientation-is-unknown">Orientation is unknown</h3>
+<pre><code>For each edge point
+    For each possible master &#x3B8;*
+        Compute gradient direction &#x3B8;
+        New &#x3B8;&#x2019; = &#x3B8; - &#x3B8;*
+        For &#x3B8;&#x2019; retrieve displacement vectors r to vote for reference point.
+</code></pre><p>Peak in this Hough space (now X,Y, &#x3B8;*) is reference point with most supporting edges</p>
+<h3 id="scale-s-is-unknown">Scale S is unknown</h3>
+<pre><code>For each edge point
+    For each possible master scale S:
+        Compute gradient direction &#x3B8;
+        For &#x3B8;&#x2019; retrieve displacement vectors r
+        Vote r scaled by S for reference point.
+</code></pre><p>Peak in this Hough space (now X,Y, S) is reference point with most supporting edges</p>
+<h2 id="training-visual-code-words">Training: Visual code-words</h2>
+<ol>
+<li>Build codebook of patches around extracted interest points using clustering </li>
+</ol>
+<p><img src="assets/image-20210114192417508.png" alt="image-20210114192417508"></p>
+<ol>
+<li>Map the patch around each interest point to closest codebook entry</li>
+</ol>
+<p><img src="assets/image-20210114192442806.png" alt="image-20210114192442806"></p>
+<ol>
+<li>For each codebook entry, store all displacements relative to object center</li>
+</ol>
+<p><img src="assets/image-20210114192911226.png" alt="image-20210114192911226"></p>
 
                                 
                                 </section>
@@ -504,14 +552,10 @@
 
             
                 
-                <a href="../hough_transform.html" class="navigation navigation-prev " aria-label="Previous page: Hough Transform">
+                <a href="Hough transform Circles.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Finding Circles">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="Voting.html" class="navigation navigation-next " aria-label="Next page: Voting">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -520,7 +564,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Line Fitting","level":"1.4.1","depth":2,"next":{"title":"Voting","level":"1.4.1.1","depth":3,"path":"hough transform/Voting.md","ref":"hough transform/Voting.md","articles":[]},"previous":{"title":"Hough Transform","level":"1.4","depth":1,"path":"hough_transform.md","ref":"hough_transform.md","articles":[{"title":"Line Fitting","level":"1.4.1","depth":2,"path":"hough transform/Line Fitting.md","ref":"hough transform/Line Fitting.md","articles":[{"title":"Voting","level":"1.4.1.1","depth":3,"path":"hough transform/Voting.md","ref":"hough transform/Voting.md","articles":[]},{"title":"Hough Transform","level":"1.4.1.2","depth":3,"path":"hough transform/Hough Transform.md","ref":"hough transform/Hough Transform.md","articles":[]},{"title":"Polar Representation of Lines","level":"1.4.1.3","depth":3,"path":"hough transform/Polar Representation of Lines.md","ref":"hough transform/Polar Representation of Lines.md","articles":[]},{"title":"Hough Algorithm","level":"1.4.1.4","depth":3,"path":"hough transform/Hough Algorithm.md","ref":"hough transform/Hough Algorithm.md","articles":[]},{"title":"Extensions - Using the Gradient","level":"1.4.1.5","depth":3,"path":"hough transform/Extensions.md","ref":"hough transform/Extensions.md","articles":[]}]},{"title":"Finding Circles","level":"1.4.2","depth":2,"path":"hough transform/Hough transform Circles.md","ref":"hough transform/Hough transform Circles.md","articles":[]},{"title":"Generalization - Hough Table","level":"1.4.3","depth":2,"path":"hough transform/Generalization.md","ref":"hough transform/Generalization.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"hough transform/Line Fitting.md","mtime":"2021-01-13T03:56:00.960Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-15T05:09:07.518Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Generalization - Hough Table","level":"1.4.3","depth":2,"next":{"title":"Camera and Images","level":"1.5","depth":1,"ref":"","articles":[]},"previous":{"title":"Finding Circles","level":"1.4.2","depth":2,"path":"hough transform/Hough transform Circles.md","ref":"hough transform/Hough transform Circles.md","articles":[]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"hough transform/Generalization.md","mtime":"2021-01-15T00:29:19.524Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-15T05:09:07.518Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

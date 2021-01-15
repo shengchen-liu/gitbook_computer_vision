@@ -18,5 +18,8 @@
     * [Polar Representation of Lines](hough transform/Polar Representation of Lines.md)
     * [Hough Algorithm](hough transform/Hough Algorithm.md)
     * [Extensions - Using the Gradient](hough transform/Extensions.md)
+  * [Finding Circles](hough transform/Hough transform Circles.md)
+  * [Generalization - Hough Table](hough transform/Generalization.md)
+* Camera and Images
 * Problem Sets
   * [Object Tracking and Pedestrian Detection](ps_object_tracking.md)
