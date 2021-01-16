@@ -21,5 +21,13 @@
   * [Finding Circles](hough transform/Hough transform Circles.md)
   * [Generalization - Hough Table](hough transform/Generalization.md)
 * Camera and Images
+  * [Camera](camera_and_images/Camera.md)
+    * [Blur](camera_and_images/Blur.md)
+    * [Lenses](camera_and_images/Lenses.md)
+  * [Perspective Imaging](camera_and_images/Perspective Imaging.md)
+    * [Homogeneous Coordinates](camera_and_images/Homogeneous Coordinates.md)
+    * [Geometry in Perspective](camera_and_images/Geometry in Perspective.md)
+    * [Orthographic Projection](camera_and_images/Orthographic Projection.md)
+    * [Weak Perspective](camera_and_images/Weak Perspective.md)
 * Problem Sets
   * [Object Tracking and Pedestrian Detection](ps_object_tracking.md)
