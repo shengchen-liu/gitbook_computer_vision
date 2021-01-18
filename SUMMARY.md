@@ -29,5 +29,10 @@
     * [Geometry in Perspective](camera_and_images/Geometry in Perspective.md)
     * [Orthographic Projection](camera_and_images/Orthographic Projection.md)
     * [Weak Perspective](camera_and_images/Weak Perspective.md)
+  * [Stereo Geometry](camera_and_images/Stereo Geometry.md)
+    * [Basic Stereo Geometry](camera_and_images/Basic Stereo Geometry.md)
+    * [Epipolar Geometry](camera_and_images/Epipolar Geometry.md)
+    * [Stereo Correspondence](camera_and_images/Stereo Correspondence.md)
+    * [Better Stereo Correspondence](camera_and_images/Better Stereo Coorespondence.md)
 * Problem Sets
   * [Object Tracking and Pedestrian Detection](ps_object_tracking.md)

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Perspective Imaging · Computer Vision Learning Notes</title>
+        <title>Better Stereo Correspondence · Computer Vision Learning Notes</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="Homogeneous Coordinates.html" />
     
-    
-    <link rel="prev" href="Lenses.html" />
+    <link rel="prev" href="Stereo Correspondence.html" />
     
 
     </head>
@@ -441,7 +439,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5.2" data-path="Perspective Imaging.html">
+        <li class="chapter " data-level="1.5.2" data-path="Perspective Imaging.html">
             
                 <a href="Perspective Imaging.html">
             
@@ -565,7 +563,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.3.4" data-path="Better Stereo Coorespondence.html">
+        <li class="chapter active" data-level="1.5.3.4" data-path="Better Stereo Coorespondence.html">
             
                 <a href="Better Stereo Coorespondence.html">
             
@@ -650,7 +648,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Perspective Imaging</a>
+        <a href=".." >Better Stereo Correspondence</a>
     </h1>
 </div>
 
@@ -665,14 +663,38 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="perspective-imaging">Perspective Imaging</h1>
-<h2 id="modeling-projection-&#x2013;-coordinate-system">Modeling projection &#x2013; coordinate system</h2>
-<p>Use the pin-hole model as an approximation.</p>
-<p>Put the optical center (Center of Projection) at the origin</p>
-<p>Put the image plane (Projection Plane) in front of the Center of Projection</p>
-<p>The camera looks down the negative z-axis, and the image plane has (0, 0) in the center, not the top-left corner.</p>
-<p><img src="assets/image-20210115220329018.png" alt="image-20210115220329018"></p>
-<p><img src="assets/image-20210115220652107.png" alt="image-20210115220652107"></p>
+                                <h1 id="better-stereo-correspondence">Better Stereo Correspondence</h1>
+<p>The window-matching approach is not very good as a general solution.  </p>
+<p>The basic idea is to treat pixels as parts of a whole instead of individual pixels. In other words, we can optimize corresondence assignments jointly.  </p>
+<h2 id="scanlines">Scanlines</h2>
+<p>For the scanline method, we essentially have a 1D signal from both images and we want the disparity that results in the best overall correspondence.  This is implemented with a dynamic programming formulation.  This approach results in far better depth maps compared to the naive window matching method, but still results in streaking artifacts that are the result of the limitation of scanlines because they treat every scanline  without taking int account the vertical direction.</p>
+<h2 id="grid--matching">Grid  Matching</h2>
+<p>What defines a good stereo correspondence?</p>
+<ul>
+<li>Match quality - Want each pixel to find a good appearance match in the other image</li>
+<li>Smoothness - of two pixels are adjacent, they should move about the same amount.</li>
+</ul>
+<h3 id="stereo-as-energy-minimization">Stereo as energy minimization</h3>
+<p>Data term:
+<script type="math/tex; mode=display">
+E_{data} = \sum_i (W_i (i) - W_2 (i + D(i))) ^2
+</script>
+Smoothness term:
+<script type="math/tex; mode=display">
+E_{smooth} = \sum_{neighbors i, j} \rho(D(i) -D(j))
+</script>
+Total energy:
+<script type="math/tex; mode=display">
+E = \alpha E_{data}(I_1, I_2, D) + \beta E_{smooth}(D)
+</script></p>
+<h2 id="challenges">Challenges</h2>
+<ul>
+<li>Low-contrast ; textureless image regions</li>
+<li>Occlusions</li>
+<li>Violations of brightness constancy (e.g., specular reflections)</li>
+<li>Really large baselines (foreshortening and appearance change)</li>
+<li>Camera calibration errors</li>
+</ul>
 
                                 
                                 </section>
@@ -700,14 +722,10 @@
 
             
                 
-                <a href="Lenses.html" class="navigation navigation-prev " aria-label="Previous page: Lenses">
+                <a href="Stereo Correspondence.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Stereo Correspondence">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="Homogeneous Coordinates.html" class="navigation navigation-next " aria-label="Next page: Homogeneous Coordinates">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -716,7 +734,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Perspective Imaging","level":"1.5.2","depth":2,"next":{"title":"Homogeneous Coordinates","level":"1.5.2.1","depth":3,"path":"camera_and_images/Homogeneous Coordinates.md","ref":"camera_and_images/Homogeneous Coordinates.md","articles":[]},"previous":{"title":"Lenses","level":"1.5.1.2","depth":3,"path":"camera_and_images/Lenses.md","ref":"camera_and_images/Lenses.md","articles":[]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"camera_and_images/Perspective Imaging.md","mtime":"2021-01-16T21:35:47.358Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-18T07:38:38.382Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Better Stereo Correspondence","level":"1.5.3.4","depth":3,"next":{"title":"Problem Sets","level":"1.6","depth":1,"ref":"","articles":[{"title":"Object Tracking and Pedestrian Detection","level":"1.6.1","depth":2,"path":"ps_object_tracking.md","ref":"ps_object_tracking.md","articles":[]}]},"previous":{"title":"Stereo Correspondence","level":"1.5.3.3","depth":3,"path":"camera_and_images/Stereo Correspondence.md","ref":"camera_and_images/Stereo Correspondence.md","articles":[]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"camera_and_images/Better Stereo Coorespondence.md","mtime":"2021-01-18T07:31:10.458Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-18T07:38:38.382Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

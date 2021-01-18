@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Perspective Imaging · Computer Vision Learning Notes</title>
+        <title>Stereo Geometry · Computer Vision Learning Notes</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="Homogeneous Coordinates.html" />
+    <link rel="next" href="Basic Stereo Geometry.html" />
     
     
-    <link rel="prev" href="Lenses.html" />
+    <link rel="prev" href="Weak Perspective.html" />
     
 
     </head>
@@ -441,7 +441,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5.2" data-path="Perspective Imaging.html">
+        <li class="chapter " data-level="1.5.2" data-path="Perspective Imaging.html">
             
                 <a href="Perspective Imaging.html">
             
@@ -512,7 +512,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.3" data-path="Stereo Geometry.html">
+        <li class="chapter active" data-level="1.5.3" data-path="Stereo Geometry.html">
             
                 <a href="Stereo Geometry.html">
             
@@ -650,7 +650,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Perspective Imaging</a>
+        <a href=".." >Stereo Geometry</a>
     </h1>
 </div>
 
@@ -665,14 +665,18 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="perspective-imaging">Perspective Imaging</h1>
-<h2 id="modeling-projection-&#x2013;-coordinate-system">Modeling projection &#x2013; coordinate system</h2>
-<p>Use the pin-hole model as an approximation.</p>
-<p>Put the optical center (Center of Projection) at the origin</p>
-<p>Put the image plane (Projection Plane) in front of the Center of Projection</p>
-<p>The camera looks down the negative z-axis, and the image plane has (0, 0) in the center, not the top-left corner.</p>
-<p><img src="assets/image-20210115220329018.png" alt="image-20210115220329018"></p>
-<p><img src="assets/image-20210115220652107.png" alt="image-20210115220652107"></p>
+                                <h1 id="stereo-geometry">Stereo Geometry</h1>
+<p>&quot;Stereo&quot;: having two view of the same scene.  </p>
+<p><strong>Why stereo?</strong></p>
+<p>Structure and depth are inherently ambiguous from single views.  </p>
+<h2 id="stereo">Stereo</h2>
+<ul>
+<li>The image from one eye is a little different than the image from the other eye.</li>
+<li>Think of shape from &quot;motion&quot; between two views</li>
+<li>Infer 3d shape of scene from two imges from different viewpoints.</li>
+</ul>
+<h3 id="stereo-photography-and-stereo-viewers">Stereo photography and stereo viewers</h3>
+<p>Take two pictures of the same subject from two slightly different viewpoints and display so that each eye see only one of the images.</p>
 
                                 
                                 </section>
@@ -700,12 +704,12 @@
 
             
                 
-                <a href="Lenses.html" class="navigation navigation-prev " aria-label="Previous page: Lenses">
+                <a href="Weak Perspective.html" class="navigation navigation-prev " aria-label="Previous page: Weak Perspective">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="Homogeneous Coordinates.html" class="navigation navigation-next " aria-label="Next page: Homogeneous Coordinates">
+                <a href="Basic Stereo Geometry.html" class="navigation navigation-next " aria-label="Next page: Basic Stereo Geometry">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -716,7 +720,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Perspective Imaging","level":"1.5.2","depth":2,"next":{"title":"Homogeneous Coordinates","level":"1.5.2.1","depth":3,"path":"camera_and_images/Homogeneous Coordinates.md","ref":"camera_and_images/Homogeneous Coordinates.md","articles":[]},"previous":{"title":"Lenses","level":"1.5.1.2","depth":3,"path":"camera_and_images/Lenses.md","ref":"camera_and_images/Lenses.md","articles":[]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"camera_and_images/Perspective Imaging.md","mtime":"2021-01-16T21:35:47.358Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-18T07:38:38.382Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Stereo Geometry","level":"1.5.3","depth":2,"next":{"title":"Basic Stereo Geometry","level":"1.5.3.1","depth":3,"path":"camera_and_images/Basic Stereo Geometry.md","ref":"camera_and_images/Basic Stereo Geometry.md","articles":[]},"previous":{"title":"Weak Perspective","level":"1.5.2.4","depth":3,"path":"camera_and_images/Weak Perspective.md","ref":"camera_and_images/Weak Perspective.md","articles":[]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"camera_and_images/Stereo Geometry.md","mtime":"2021-01-18T06:38:12.183Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-18T07:38:38.382Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
