@@ -34,5 +34,8 @@
     * [Epipolar Geometry](camera_and_images/Epipolar Geometry.md)
     * [Stereo Correspondence](camera_and_images/Stereo Correspondence.md)
     * [Better Stereo Correspondence](camera_and_images/Better Stereo Coorespondence.md)
+  * [Geometric Camera Calibration](camera_and_images/Geometric Camera Calibration.md)
+    * [Extrinsic Parameters](camera_and_images/Extrinsic Parameters.md)
+    * 
 * Problem Sets
   * [Object Tracking and Pedestrian Detection](ps_object_tracking.md)
