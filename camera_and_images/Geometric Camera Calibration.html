@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Stereo Correspondence · Computer Vision Learning Notes</title>
+        <title>Geometric Camera Calibration · Computer Vision Learning Notes</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="Better Stereo Coorespondence.html" />
+    <link rel="next" href="Extrinsic Parameters.html" />
     
     
-    <link rel="prev" href="Epipolar Geometry.html" />
+    <link rel="prev" href="Better Stereo Coorespondence.html" />
     
 
     </head>
@@ -552,7 +552,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5.3.3" data-path="Stereo Correspondence.html">
+        <li class="chapter " data-level="1.5.3.3" data-path="Stereo Correspondence.html">
             
                 <a href="Stereo Correspondence.html">
             
@@ -583,7 +583,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.4" data-path="Geometric Camera Calibration.html">
+        <li class="chapter active" data-level="1.5.4" data-path="Geometric Camera Calibration.html">
             
                 <a href="Geometric Camera Calibration.html">
             
@@ -682,7 +682,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Stereo Correspondence</a>
+        <a href=".." >Geometric Camera Calibration</a>
     </h1>
 </div>
 
@@ -697,36 +697,20 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="stereo-correspondence">Stereo Correspondence</h2>
-<h3 id="assumptions">Assumptions</h3>
-<ul>
-<li>Assume parallel (co-planar) image planes&#x2026;</li>
-<li>Assume same focal lengths</li>
-<li>Assume epipolar lines are horizontal </li>
-<li>Assume epipolar lines are at the same y location in the image</li>
-</ul>
-<h3 id="soft-constraints">Soft constraints</h3>
-<ul>
-<li><strong>Similarity</strong>: The corresponding pixel should have a similar intensity</li>
-<li><strong>Uniqueness</strong>:  There is no more than one matching pixel</li>
-<li><strong>Ordering</strong>: Corresponding pixels must maintain their order: pixels ABC in the left image must likewise be matched to A&apos;B&apos;C&apos; in the right image.</li>
-<li><strong>Limited Disparity Gradient</strong>: The depth of the image should not change too quickly.</li>
-</ul>
-<p>To find matches in the image pair, we will assume:</p>
-<ul>
-<li>Most scene points visible from both views </li>
-<li>Image regions fro the matches are similar in appearance.</li>
-</ul>
-<h2 id="dense-correspondence-search">Dense Correspondence Search</h2>
-<p>This is based on <strong>similarity</strong> constraint.</p>
-<p>Dense here indicates that we will try to find matches for every pixel in the image.</p>
-<p>For each pixel (or window) in the left image:</p>
-<ul>
-<li>Compare with each pixel (or window) in the right image along the epipolar line.</li>
-<li>Choose the position with the minimum &quot;match cost&quot;.  This can be determined by sum o fsquare differences (SSD) or the normalized correlation.</li>
-</ul>
-<h2 id="uniqueness-constraint">Uniqueness Constraint</h2>
-<p>The matching pixel could be zero because of occlusion.  Certain pixels will only be visible from one side at occlusion boundaries.</p>
+                                <h1 id="geometric-camera-calibration">Geometric Camera Calibration</h1>
+<p>In all the previous discussions we have the notion of a camera&apos;s coordinate system - an origin and an orientation.</p>
+<p>We put the center of projection at this origin and the optic axis down the z axis.</p>
+<p>So to do geometric reasoning about the world we need to relate the coordinate system of the world to that of the camera and the image.</p>
+<p>We want to use the camera to tell us things about the world.  So we need the relationship between coordinates in the world and coordinates in the image: <strong>geometric camera calibration</strong>.</p>
+<p>Composed of 2 transformations:</p>
+<ol>
+<li><h2 id="extrinsic-parameters-or-camera-pose">Extrinsic parameters (or camera pose)</h2>
+<p>From some (arbitrary) world coordinate system to the camera&apos;s 3D coordinate system.</p>
+</li>
+<li><h2 id="intrinsic-parameters">Intrinsic parameters</h2>
+</li>
+</ol>
+<p>From the 3D coordinates in the camera frame to the 2D image plane via projection.</p>
 
                                 
                                 </section>
@@ -754,12 +738,12 @@
 
             
                 
-                <a href="Epipolar Geometry.html" class="navigation navigation-prev " aria-label="Previous page: Epipolar Geometry">
+                <a href="Better Stereo Coorespondence.html" class="navigation navigation-prev " aria-label="Previous page: Better Stereo Correspondence">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="Better Stereo Coorespondence.html" class="navigation navigation-next " aria-label="Next page: Better Stereo Correspondence">
+                <a href="Extrinsic Parameters.html" class="navigation navigation-next " aria-label="Next page: Extrinsic Parameters">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -770,7 +754,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Stereo Correspondence","level":"1.5.3.3","depth":3,"next":{"title":"Better Stereo Correspondence","level":"1.5.3.4","depth":3,"path":"camera_and_images/Better Stereo Coorespondence.md","ref":"camera_and_images/Better Stereo Coorespondence.md","articles":[]},"previous":{"title":"Epipolar Geometry","level":"1.5.3.2","depth":3,"path":"camera_and_images/Epipolar Geometry.md","ref":"camera_and_images/Epipolar Geometry.md","articles":[]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"camera_and_images/Stereo Correspondence.md","mtime":"2021-01-18T07:38:47.301Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-18T22:58:51.394Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Geometric Camera Calibration","level":"1.5.4","depth":2,"next":{"title":"Extrinsic Parameters","level":"1.5.4.1","depth":3,"path":"camera_and_images/Extrinsic Parameters.md","ref":"camera_and_images/Extrinsic Parameters.md","articles":[]},"previous":{"title":"Better Stereo Correspondence","level":"1.5.3.4","depth":3,"path":"camera_and_images/Better Stereo Coorespondence.md","ref":"camera_and_images/Better Stereo Coorespondence.md","articles":[]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"camera_and_images/Geometric Camera Calibration.md","mtime":"2021-01-18T20:46:29.223Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-18T22:58:51.394Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

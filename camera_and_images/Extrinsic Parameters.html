@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Stereo Correspondence · Computer Vision Learning Notes</title>
+        <title>Extrinsic Parameters · Computer Vision Learning Notes</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="Better Stereo Coorespondence.html" />
     
-    
-    <link rel="prev" href="Epipolar Geometry.html" />
+    <link rel="prev" href="Geometric Camera Calibration.html" />
     
 
     </head>
@@ -552,7 +550,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5.3.3" data-path="Stereo Correspondence.html">
+        <li class="chapter " data-level="1.5.3.3" data-path="Stereo Correspondence.html">
             
                 <a href="Stereo Correspondence.html">
             
@@ -597,7 +595,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.5.4.1" data-path="Extrinsic Parameters.html">
+        <li class="chapter active" data-level="1.5.4.1" data-path="Extrinsic Parameters.html">
             
                 <a href="Extrinsic Parameters.html">
             
@@ -682,7 +680,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Stereo Correspondence</a>
+        <a href=".." >Extrinsic Parameters</a>
     </h1>
 </div>
 
@@ -697,36 +695,173 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="stereo-correspondence">Stereo Correspondence</h2>
-<h3 id="assumptions">Assumptions</h3>
-<ul>
-<li>Assume parallel (co-planar) image planes&#x2026;</li>
-<li>Assume same focal lengths</li>
-<li>Assume epipolar lines are horizontal </li>
-<li>Assume epipolar lines are at the same y location in the image</li>
-</ul>
-<h3 id="soft-constraints">Soft constraints</h3>
-<ul>
-<li><strong>Similarity</strong>: The corresponding pixel should have a similar intensity</li>
-<li><strong>Uniqueness</strong>:  There is no more than one matching pixel</li>
-<li><strong>Ordering</strong>: Corresponding pixels must maintain their order: pixels ABC in the left image must likewise be matched to A&apos;B&apos;C&apos; in the right image.</li>
-<li><strong>Limited Disparity Gradient</strong>: The depth of the image should not change too quickly.</li>
-</ul>
-<p>To find matches in the image pair, we will assume:</p>
-<ul>
-<li>Most scene points visible from both views </li>
-<li>Image regions fro the matches are similar in appearance.</li>
-</ul>
-<h2 id="dense-correspondence-search">Dense Correspondence Search</h2>
-<p>This is based on <strong>similarity</strong> constraint.</p>
-<p>Dense here indicates that we will try to find matches for every pixel in the image.</p>
-<p>For each pixel (or window) in the left image:</p>
-<ul>
-<li>Compare with each pixel (or window) in the right image along the epipolar line.</li>
-<li>Choose the position with the minimum &quot;match cost&quot;.  This can be determined by sum o fsquare differences (SSD) or the normalized correlation.</li>
-</ul>
-<h2 id="uniqueness-constraint">Uniqueness Constraint</h2>
-<p>The matching pixel could be zero because of occlusion.  Certain pixels will only be visible from one side at occlusion boundaries.</p>
+                                <h1 id="extrinsic-parameters">Extrinsic Parameters</h1>
+<h2 id="transformation">Transformation</h2>
+<p>Transformation from &quot;world space&quot; to &quot;camera space&quot;: 6 degree of freedom.</p>
+<h2 id="notation">Notation</h2>
+<p><strong><script type="math/tex; ">^AP</script></strong> is the coordinates of <script type="math/tex; ">P</script> in frame <script type="math/tex; ">A</script>.</p>
+<p>Given some origin <script type="math/tex; ">^A O</script>, 
+<script type="math/tex; mode=display">
+^A P = \begin{bmatrix}
+^Ax \\
+^Ay \\
+^Az
+\end{bmatrix}
+
+\Leftrightarrow 	
+\overrightarrow{OP} = (^Ax \cdot i_A)(^Ay \cdot j_A)(^Az \cdot k_A)
+</script></p>
+<h2 id="translation">Translation</h2>
+<p><img src="assets/image-20210118155922366.png" alt="image-20210118155922366">
+<script type="math/tex; mode=display">
+^BP = ^AP + ^B(O_A)
+</script>
+Using homogeneous coordinates, translation can be expressed as a matrix multiplication.
+<script type="math/tex; mode=display">
+\begin{bmatrix} ^Bp \\ 1
+\end{bmatrix}
+= 
+\begin{bmatrix} I & ^BO_A 
+\\ 0^T & 1
+\end{bmatrix}
+\begin{bmatrix} 
+^AP \\
+1
+\end{bmatrix}
+</script>
+Where <script type="math/tex; ">I</script> is 3x3 identity.</p>
+<p><strong>Translation is commutative.</strong></p>
+<h2 id="rotation">Rotation</h2>
+<p><img src="assets/image-20210118160434721.png" alt="image-20210118160434721">
+<script type="math/tex; mode=display">
+^PB = (^B_AR) (^AP)
+</script>
+<script type="math/tex; ">^B_AR</script> is the rotation matrix, which means describing frame A in the coordinates system of frame B
+<script type="math/tex; mode=display">
+^B_AR = 
+\begin{bmatrix} 
+i_A \cdot i_B & j_A \cdot i_B & k_A \cdot i_B \\
+i_A \cdot j_B & j_A \cdot j_B & k_A \cdot j_B \\
+i_A \cdot k_B & j_A \cdot k_B & k_A \cdot k_B \\
+\end{bmatrix} \\
+
+= \begin{bmatrix} 
+^Bi_A & ^Bj_A & ^Bk_A
+\end{bmatrix} \\
+=  \begin{bmatrix} 
+{^Ai_B}^T \\
+{^Aj_B}^T \\
+{^Ak_B}^T
+\end{bmatrix} \\
+</script></p>
+<h3 id="example-rotation-about-z-axis">Example: Rotation about z axis</h3>
+<p><img src="assets/image-20210118161440882.png" alt="image-20210118161440882">
+<script type="math/tex; mode=display">
+R_z(\theta) = 
+\begin{bmatrix} 
+\cos(\theta) & -\sin(\theta) & 0 \\
+\sin(\theta) & \cos(\theta) & 0 \\
+0 & 0 &1 \\
+\end{bmatrix}
+</script></p>
+<h3 id="rotation-with-homogeneous-coordinates">Rotation with Homogeneous Coordinates</h3>
+<p><script type="math/tex; mode=display">
+\begin{bmatrix} ^Bp \\ 1
+\end{bmatrix}
+= 
+\begin{bmatrix} 
+^B_AR & 0 \\ 
+0^T & 1
+\end{bmatrix}
+\begin{bmatrix} 
+^AP \\
+1
+\end{bmatrix}
+</script></p>
+<p>Rotation is not <strong>commutative</strong></p>
+<h2 id="total-rigid-transformation">Total Rigid Transformation</h2>
+<p><script type="math/tex; mode=display">
+^PB = (^B_AR) (^BP) + ^BO_A
+</script></p>
+<p>Using homogeneous coordinates:
+<script type="math/tex; mode=display">
+\begin{bmatrix} ^Bp \\ 1
+\end{bmatrix}
+= 
+\begin{bmatrix} I & ^BO_A 
+\\ 0^T & 1
+\end{bmatrix}
+\begin{bmatrix} 
+^B_AR & 0 \\ 
+0^T & 1
+\end{bmatrix}
+\begin{bmatrix} 
+^AP \\
+1
+\end{bmatrix} \\
+= \begin{bmatrix} 
+^R_AB & ^BO_A 
+\\ 0^T & 1
+\end{bmatrix} 
+\begin{bmatrix} 
+^AP \\
+1
+\end{bmatrix} \\
+=
+^B_AT \begin{bmatrix} 
+^AP \\
+1
+\end{bmatrix}
+</script>
+So 
+<script type="math/tex; mode=display">
+\begin{bmatrix} 
+^AP \\
+1
+\end{bmatrix} =
+^A_BT \begin{bmatrix} 
+^BP \\
+1
+\end{bmatrix} 
+=
+(^B_AT)^{-1} \begin{bmatrix} 
+^AP \\
+1
+\end{bmatrix}
+</script>
+<strong>Homogeneous coordinates:</strong></p>
+<p>Homogeneous coordinates allows us to write coordinate transforms as a single matrix!
+<script type="math/tex; mode=display">
+^B \overrightarrow{p} = (^B_AT) \space (^A \overrightarrow{p})
+</script></p>
+<p><script type="math/tex; mode=display">
+^B \overrightarrow{p}_{(4 \times 1)} = \begin{bmatrix} 
+\begin{bmatrix}
+& & \\
+& ^B_AR & \\
+& & 
+\end{bmatrix} 
+\begin{bmatrix}
+| \\
+^B_A \overrightarrow{t} \\
+|
+\end{bmatrix}\\
+\begin{matrix}
+0 & 0 &0 
+\end{matrix}
+\begin{matrix}
+&1
+\end{matrix}
+\end{bmatrix}_{(4 \times 4)}
+\begin{bmatrix}
+x \\ 
+y \\ 
+z \\
+1
+\end{bmatrix}_{(4 \times 1)}
+</script></p>
+<h3 id="from-world-to-camera">From World to Camera</h3>
+<p>From world to camera is the <strong>extrinsic</strong> parameter matrix (4 x 4)</p>
 
                                 
                                 </section>
@@ -754,14 +889,10 @@
 
             
                 
-                <a href="Epipolar Geometry.html" class="navigation navigation-prev " aria-label="Previous page: Epipolar Geometry">
+                <a href="Geometric Camera Calibration.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Geometric Camera Calibration">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="Better Stereo Coorespondence.html" class="navigation navigation-next " aria-label="Next page: Better Stereo Correspondence">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -770,7 +901,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Stereo Correspondence","level":"1.5.3.3","depth":3,"next":{"title":"Better Stereo Correspondence","level":"1.5.3.4","depth":3,"path":"camera_and_images/Better Stereo Coorespondence.md","ref":"camera_and_images/Better Stereo Coorespondence.md","articles":[]},"previous":{"title":"Epipolar Geometry","level":"1.5.3.2","depth":3,"path":"camera_and_images/Epipolar Geometry.md","ref":"camera_and_images/Epipolar Geometry.md","articles":[]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"camera_and_images/Stereo Correspondence.md","mtime":"2021-01-18T07:38:47.301Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-18T22:58:51.394Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Extrinsic Parameters","level":"1.5.4.1","depth":3,"next":{"title":"Problem Sets","level":"1.6","depth":1,"ref":"","articles":[{"title":"Object Tracking and Pedestrian Detection","level":"1.6.1","depth":2,"path":"ps_object_tracking.md","ref":"ps_object_tracking.md","articles":[]}]},"previous":{"title":"Geometric Camera Calibration","level":"1.5.4","depth":2,"path":"camera_and_images/Geometric Camera Calibration.md","ref":"camera_and_images/Geometric Camera Calibration.md","articles":[{"title":"Extrinsic Parameters","level":"1.5.4.1","depth":3,"path":"camera_and_images/Extrinsic Parameters.md","ref":"camera_and_images/Extrinsic Parameters.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"camera_and_images/Extrinsic Parameters.md","mtime":"2021-01-18T21:45:50.722Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-18T22:58:51.394Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
