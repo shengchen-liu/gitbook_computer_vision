@@ -43,4 +43,4 @@ So far, the strong edge pixels should certainly be involved in the final edge im
 $$
 \nabla ^2 f = \frac{\partial ^2 f}{\partial x^2} + \frac{\partial ^2 f}{\partial y^2}
 $$
-Once you apply the Laplacian, the zero-corssings are the edges of the image.
+Once you apply the Laplacian, the zero-crossings are the edges of the image.

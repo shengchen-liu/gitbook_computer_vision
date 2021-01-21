@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Voting · Computer Vision Learning Notes</title>
+        <title>Harris Corners · Computer Vision Learning Notes</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="Hough Transform.html" />
+    <link rel="next" href="Scale Invariance.html" />
     
-    
-    <link rel="prev" href="Line Fitting.html" />
     
 
     </head>
@@ -267,9 +265,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="Line Fitting.html">
+        <li class="chapter " data-level="1.4.1" data-path="../hough transform/Line Fitting.html">
             
-                <a href="Line Fitting.html">
+                <a href="../hough transform/Line Fitting.html">
             
                     
                     Line Fitting
@@ -281,9 +279,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.4.1.1" data-path="Voting.html">
+        <li class="chapter " data-level="1.4.1.1" data-path="../hough transform/Voting.html">
             
-                <a href="Voting.html">
+                <a href="../hough transform/Voting.html">
             
                     
                     Voting
@@ -294,9 +292,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.1.2" data-path="Hough Transform.html">
+        <li class="chapter " data-level="1.4.1.2" data-path="../hough transform/Hough Transform.html">
             
-                <a href="Hough Transform.html">
+                <a href="../hough transform/Hough Transform.html">
             
                     
                     Hough Transform
@@ -307,9 +305,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.1.3" data-path="Polar Representation of Lines.html">
+        <li class="chapter " data-level="1.4.1.3" data-path="../hough transform/Polar Representation of Lines.html">
             
-                <a href="Polar Representation of Lines.html">
+                <a href="../hough transform/Polar Representation of Lines.html">
             
                     
                     Polar Representation of Lines
@@ -320,9 +318,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.1.4" data-path="Hough Algorithm.html">
+        <li class="chapter " data-level="1.4.1.4" data-path="../hough transform/Hough Algorithm.html">
             
-                <a href="Hough Algorithm.html">
+                <a href="../hough transform/Hough Algorithm.html">
             
                     
                     Hough Algorithm
@@ -333,9 +331,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.1.5" data-path="Extensions.html">
+        <li class="chapter " data-level="1.4.1.5" data-path="../hough transform/Extensions.html">
             
-                <a href="Extensions.html">
+                <a href="../hough transform/Extensions.html">
             
                     
                     Extensions - Using the Gradient
@@ -351,9 +349,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2" data-path="Hough transform Circles.html">
+        <li class="chapter " data-level="1.4.2" data-path="../hough transform/Hough transform Circles.html">
             
-                <a href="Hough transform Circles.html">
+                <a href="../hough transform/Hough transform Circles.html">
             
                     
                     Finding Circles
@@ -364,9 +362,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="Generalization.html">
+        <li class="chapter " data-level="1.4.3" data-path="../hough transform/Generalization.html">
             
-                <a href="Generalization.html">
+                <a href="../hough transform/Generalization.html">
             
                     
                     Generalization - Hough Table
@@ -659,9 +657,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="../feature_recognition/Feature Recognition.html">
+        <li class="chapter " data-level="1.6" data-path="Feature Recognition.html">
             
-                <a href="../feature_recognition/Feature Recognition.html">
+                <a href="Feature Recognition.html">
             
                     
                     Feature Recognition
@@ -673,9 +671,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.6.1" data-path="../feature_recognition/Introduction to Features.html">
+        <li class="chapter " data-level="1.6.1" data-path="Introduction to Features.html">
             
-                <a href="../feature_recognition/Introduction to Features.html">
+                <a href="Introduction to Features.html">
             
                     
                     Introduction to Features
@@ -700,9 +698,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.6.2.1" data-path="../feature_recognition/Finding Corners.html">
+        <li class="chapter active" data-level="1.6.2.1" data-path="Finding Corners.html">
             
-                <a href="../feature_recognition/Finding Corners.html">
+                <a href="Finding Corners.html">
             
                     
                     Harris Corners
@@ -713,9 +711,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.2.2" data-path="../feature_recognition/Scale Invariance.html">
+        <li class="chapter " data-level="1.6.2.2" data-path="Scale Invariance.html">
             
-                <a href="../feature_recognition/Scale Invariance.html">
+                <a href="Scale Invariance.html">
             
                     
                     Scale Invariance (SIFT Detector)
@@ -798,7 +796,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Voting</a>
+        <a href=".." >Harris Corners</a>
     </h1>
 </div>
 
@@ -813,18 +811,72 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="voting">Voting</h1>
-<p>It is computationally infeasible to simply try every possible line given a set of edge pixels, in stead, we need to let the data tell us something.  <strong>Voting</strong> is a general technique where we let the features (edge pixels) vote for all the models with which the are compatible.</p>
-<ol>
-<li>Cycle through features, each casting votes for model parameters.</li>
-<li>Look for model parameters that receive a lot of votes.</li>
-</ol>
-<h2 id="voting---why-it-works">Voting - Why it works</h2>
-<ol>
-<li>Noise &amp; clutter features will cast votes too, but typically their votes should be inconsistent with the majority of &#x201C;good&#x201D; features.</li>
-<li>Ok if some features not observed, as model can span multiple fragments.</li>
-</ol>
-
+                                <h1 id="finding-corners">Finding Corners</h1>
+<h2 id="basic-idea">Basic Idea</h2>
+<p>&quot;<strong>corner</strong>&quot;: significant change in all directions with small shift</p>
+<h2 id="key-property">Key Property</h2>
+<p>In the region around a corner, image gradient has two or more dominant directions.</p>
+<h2 id="harris-corners">Harris Corners</h2>
+<p>Start with an image <script type="math/tex; ">I</script>, the change in appearance after shifting that image some (small) amount (<script type="math/tex; ">u, v</script>), over some window function <script type="math/tex; ">w</script>, is represented by an error function:
+<script type="math/tex; mode=display">
+E(u, v) = \sum_{x, y} w(x, y) [I(x + u, y +v) - I(x, y)]^2
+</script></p>
+<p><img src="../feature_recogntion/assets/image-20210121004543341.png" alt="image-20210121004543341"></p>
+<h3 id="window-function">Window Function</h3>
+<p>A Gaussian Filter that will weigh pixels near the center of the window appropriately.</p>
+<h3 id="taylor-expansion">Taylor Expansion</h3>
+<p>We want a large error for a small shift that indicates a corner-like region.  We use Taylor expansions .</p>
+<p>In 2D, the 2nd order Taylor Expansion about (0, 0):</p>
+<p><img src="assets/image-20210121004905452-1611208231329.png" alt="image-20210121004905452"></p>
+<p>Simplify:
+<script type="math/tex; mode=display">
+E(u, v) = \begin{bmatrix} u & v\end{bmatrix} M \begin{bmatrix}
+u \\
+v\end{bmatrix}
+</script>
+Where <strong>M</strong> is a <strong>second moment matrix</strong>:
+<script type="math/tex; mode=display">
+M = \sum_{x, y} w(x, y) \begin{bmatrix} 
+I_x^2 & I_xI_y \\
+I_xI_y & I_y^2
+\end{bmatrix}
+</script></p>
+<h3 id="properties-of-the-second-moment-matrix">Properties of the Second Moment Matrix</h3>
+<p>The surface <script type="math/tex; ">E(u,v)</script> is locally approximated by a quadratic form.</p>
+<p><img src="assets/image-20210121005706933.png" alt="image-20210121005706933"></p>
+<p>Consider a constant &quot;slice&quot; of <script type="math/tex; ">E(u,v)</script>, this is the equation of an ellipse.</p>
+<p><strong>Diagonalization</strong> of <strong>M</strong>:
+<script type="math/tex; mode=display">
+M = R^{-1} \begin{bmatrix} \lambda_1 & 0  \\
+0 & \lambda_2
+\end{bmatrix}
+R
+</script>
+where <script type="math/tex; ">\lambda</script>s are the eigenvalues.</p>
+<p><script type="math/tex; ">R</script> gives us the orientation of the ellipse and <script type="math/tex; ">\lambda</script>s give us the length of its major and minor axes.
+<script type="math/tex; mode=display">
+\lambda_1 \gg \lambda_2 \text{or} \lambda_2 \gg \lambda_1, \quad \text{edge} \\
+\lambda_1, \lambda_2 \approx 0, \quad \text{flat region} \\
+\lambda_1, \lambda_2 \gg 0 \text{and} \lambda_1 \sim \lambda_2, \quad \text{corner}
+</script></p>
+<h3 id="harris-response-function">Harris Response Function</h3>
+<p><script type="math/tex; mode=display">
+R = \det{M}  - \alpha \text{trace}(M)^2 = \lambda_1 \lambda_2 - \alpha (\lambda_1 + \lambda_2) ^2
+</script></p>
+<p>Empirically, <script type="math/tex; ">\alpha \in [0.04, 0.06]</script></p>
+<p>The classification breakdown:
+<script type="math/tex; mode=display">
+|R| \approx 0, \quad \text{flat region} \\
+R \ll 0, \quad \text{edge} \\
+R \gg 0 , \quad \text{corner}
+</script></p>
+<h2 id="harris-detector-algorithm">Harris Detector Algorithm</h2>
+<pre><code>1. Compute Gaussian derivatives at each pixel
+2. Compute second moment matrix M in a Gaussian window around each pixel
+3. Compute corner response function R
+4. Threshold R
+5. Find local maxima of response function (nonmaximum suppression)
+</code></pre>
                                 
                                 </section>
                             
@@ -851,12 +903,8 @@
 
             
                 
-                <a href="Line Fitting.html" class="navigation navigation-prev " aria-label="Previous page: Line Fitting">
-                    <i class="fa fa-angle-left"></i>
-                </a>
                 
-                
-                <a href="Hough Transform.html" class="navigation navigation-next " aria-label="Next page: Hough Transform">
+                <a href="Scale Invariance.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Scale Invariance (SIFT Detector)">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -867,7 +915,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Voting","level":"1.4.1.1","depth":3,"next":{"title":"Hough Transform","level":"1.4.1.2","depth":3,"path":"hough transform/Hough Transform.md","ref":"hough transform/Hough Transform.md","articles":[]},"previous":{"title":"Line Fitting","level":"1.4.1","depth":2,"path":"hough transform/Line Fitting.md","ref":"hough transform/Line Fitting.md","articles":[{"title":"Voting","level":"1.4.1.1","depth":3,"path":"hough transform/Voting.md","ref":"hough transform/Voting.md","articles":[]},{"title":"Hough Transform","level":"1.4.1.2","depth":3,"path":"hough transform/Hough Transform.md","ref":"hough transform/Hough Transform.md","articles":[]},{"title":"Polar Representation of Lines","level":"1.4.1.3","depth":3,"path":"hough transform/Polar Representation of Lines.md","ref":"hough transform/Polar Representation of Lines.md","articles":[]},{"title":"Hough Algorithm","level":"1.4.1.4","depth":3,"path":"hough transform/Hough Algorithm.md","ref":"hough transform/Hough Algorithm.md","articles":[]},{"title":"Extensions - Using the Gradient","level":"1.4.1.5","depth":3,"path":"hough transform/Extensions.md","ref":"hough transform/Extensions.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"hough transform/Voting.md","mtime":"2021-01-13T03:56:00.960Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-21T06:52:47.762Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Harris Corners","level":"1.6.2.1","depth":3,"next":{"title":"Scale Invariance (SIFT Detector)","level":"1.6.2.2","depth":3,"path":"feature_recognition/Scale Invariance.md","ref":"feature_recognition/Scale Invariance.md","articles":[]},"previous":{"title":"Finding Interest Points","level":"1.6.2","depth":2,"ref":"","articles":[{"title":"Harris Corners","level":"1.6.2.1","depth":3,"path":"feature_recognition/Finding Corners.md","ref":"feature_recognition/Finding Corners.md","articles":[]},{"title":"Scale Invariance (SIFT Detector)","level":"1.6.2.2","depth":3,"path":"feature_recognition/Scale Invariance.md","ref":"feature_recognition/Scale Invariance.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"feature_recognition/Finding Corners.md","mtime":"2021-01-21T06:27:04.833Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-21T06:52:47.762Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
