@@ -15,9 +15,6 @@ $$
 E(u, v) = \sum_{x, y} w(x, y) [I(x + u, y +v) - I(x, y)]^2
 $$
 
-
-![image-20210121004543341](../feature_recogntion/assets/image-20210121004543341.png)
-
 ### Window Function
 
 A Gaussian Filter that will weigh pixels near the center of the window appropriately.
