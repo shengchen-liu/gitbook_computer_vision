@@ -36,6 +36,13 @@
     * [Better Stereo Correspondence](camera_and_images/Better Stereo Coorespondence.md)
   * [Geometric Camera Calibration](camera_and_images/Geometric Camera Calibration.md)
     * [Extrinsic Parameters](camera_and_images/Extrinsic Parameters.md)
-    * 
+    * [Intrinsic Parameters](camera_and_images/Intrinsic Camera Calibration.md)
+    * [Combining Extrinsic and Intrinsic Calibration Parameters](camera_and_images/Combining Extrinsic and Intrinsic Calibration Parameters.md)
+    * Calibrating Cameras
+* [Feature Recognition](feature_recognition/Feature Recognition.md)
+  * [Introduction to Features](feature_recognition/Introduction to Features.md)
+  * Finding Interest Points
+    * [Harris Corners](feature_recognition/Finding Corners.md)
+    * [Scale Invariance (SIFT Detector)](feature_recognition/Scale Invariance.md)
 * Problem Sets
   * [Object Tracking and Pedestrian Detection](ps_object_tracking.md)
