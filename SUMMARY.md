@@ -44,5 +44,9 @@
   * Finding Interest Points
     * [Harris Corners](feature_recognition/Finding Corners.md)
     * [Scale Invariance (SIFT Detector)](feature_recognition/Scale Invariance.md)
+  * [Matching Interest Points](feature_recognition/Matching Interest Points.md)
+    * [SIFT Descriptor](feature_recognition/SIFT Descriptor.md)
+    * [Matching Feature Points](feature_recognition/Matching Feature Points.md)
+    * [Feature Points for Object Recognition](feature_recognition/Feature Points for Object Recognition.md)
 * Problem Sets
   * [Object Tracking and Pedestrian Detection](ps_object_tracking.md)
