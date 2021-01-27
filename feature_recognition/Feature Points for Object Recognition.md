@@ -1,5 +1,7 @@
 # Feature Points for Object Recognition
 
+We can use our feature descriptors to find objects in images.
+
 ## Train
 
 1. Extract outlines with background subtraction
@@ -7,5 +9,5 @@
 
 ## Test
 
-1. Find possible matches
-2. Search for consistent solution - such as affine.
+1. Search for these keypoints to identify possible matches.
+2. Out of these matches, we identify consistent solutions - such as affine.

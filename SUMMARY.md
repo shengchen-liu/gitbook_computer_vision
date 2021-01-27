@@ -48,5 +48,9 @@
     * [SIFT Descriptor](feature_recognition/SIFT Descriptor.md)
     * [Matching Feature Points](feature_recognition/Matching Feature Points.md)
     * [Feature Points for Object Recognition](feature_recognition/Feature Points for Object Recognition.md)
+  * [Feature-Based Alignment](feature_recognition/Coming Full Circle Feature-Based Alignment.md)
+    * [Outlier Rejection](feature_recognition/Outlier Rejection.md)
+    * [Error Functions](feature_recognition/Error Functions.md)
+    * [RANSAC](feature_recognition/RANSAC.md)
 * Problem Sets
   * [Object Tracking and Pedestrian Detection](ps_object_tracking.md)
