@@ -57,6 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="Coming Full Circle Feature-Based Alignment.html" />
+    
     
     <link rel="prev" href="Matching Feature Points.html" />
     
@@ -787,6 +789,64 @@
             
         </li>
     
+        <li class="chapter " data-level="1.6.4" data-path="Coming Full Circle Feature-Based Alignment.html">
+            
+                <a href="Coming Full Circle Feature-Based Alignment.html">
+            
+                    
+                    Feature-Based Alignment
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.4.1" data-path="Outlier Rejection.html">
+            
+                <a href="Outlier Rejection.html">
+            
+                    
+                    Outlier Rejection
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4.2" data-path="Error Functions.html">
+            
+                <a href="Error Functions.html">
+            
+                    
+                    Error Functions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4.3" data-path="RANSAC.html">
+            
+                <a href="RANSAC.html">
+            
+                    
+                    RANSAC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
 
             </ul>
             
@@ -870,6 +930,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="feature-points-for-object-recognition">Feature Points for Object Recognition</h1>
+<p>We can use our feature descriptors to find objects in images.</p>
 <h2 id="train">Train</h2>
 <ol>
 <li>Extract outlines with background subtraction</li>
@@ -877,8 +938,8 @@
 </ol>
 <h2 id="test">Test</h2>
 <ol>
-<li>Find possible matches</li>
-<li>Search for consistent solution - such as affine.</li>
+<li>Search for these keypoints to identify possible matches.</li>
+<li>Out of these matches, we identify consistent solutions - such as affine.</li>
 </ol>
 
                                 
@@ -907,10 +968,14 @@
 
             
                 
-                <a href="Matching Feature Points.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Matching Feature Points">
+                <a href="Matching Feature Points.html" class="navigation navigation-prev " aria-label="Previous page: Matching Feature Points">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="Coming Full Circle Feature-Based Alignment.html" class="navigation navigation-next " aria-label="Next page: Feature-Based Alignment">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -919,7 +984,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Feature Points for Object Recognition","level":"1.6.3.3","depth":3,"next":{"title":"Problem Sets","level":"1.7","depth":1,"ref":"","articles":[{"title":"Object Tracking and Pedestrian Detection","level":"1.7.1","depth":2,"path":"ps_object_tracking.md","ref":"ps_object_tracking.md","articles":[]}]},"previous":{"title":"Matching Feature Points","level":"1.6.3.2","depth":3,"path":"feature_recognition/Matching Feature Points.md","ref":"feature_recognition/Matching Feature Points.md","articles":[]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"feature_recognition/Feature Points for Object Recognition.md","mtime":"2021-01-21T21:13:11.235Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-21T22:23:24.235Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Feature Points for Object Recognition","level":"1.6.3.3","depth":3,"next":{"title":"Feature-Based Alignment","level":"1.6.4","depth":2,"path":"feature_recognition/Coming Full Circle Feature-Based Alignment.md","ref":"feature_recognition/Coming Full Circle Feature-Based Alignment.md","articles":[{"title":"Outlier Rejection","level":"1.6.4.1","depth":3,"path":"feature_recognition/Outlier Rejection.md","ref":"feature_recognition/Outlier Rejection.md","articles":[]},{"title":"Error Functions","level":"1.6.4.2","depth":3,"path":"feature_recognition/Error Functions.md","ref":"feature_recognition/Error Functions.md","articles":[]},{"title":"RANSAC","level":"1.6.4.3","depth":3,"path":"feature_recognition/RANSAC.md","ref":"feature_recognition/RANSAC.md","articles":[]}]},"previous":{"title":"Matching Feature Points","level":"1.6.3.2","depth":3,"path":"feature_recognition/Matching Feature Points.md","ref":"feature_recognition/Matching Feature Points.md","articles":[]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"feature_recognition/Feature Points for Object Recognition.md","mtime":"2021-01-26T23:31:08.354Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-27T04:57:22.473Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
