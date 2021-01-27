@@ -39,6 +39,7 @@
     * [Intrinsic Parameters](camera_and_images/Intrinsic Camera Calibration.md)
     * [Combining Extrinsic and Intrinsic Calibration Parameters](camera_and_images/Combining Extrinsic and Intrinsic Calibration Parameters.md)
     * Calibrating Cameras
+* Multiple Views
 * [Feature Recognition](feature_recognition/Feature Recognition.md)
   * [Introduction to Features](feature_recognition/Introduction to Features.md)
   * Finding Interest Points
