@@ -39,7 +39,9 @@
     * [Intrinsic Parameters](camera_and_images/Intrinsic Camera Calibration.md)
     * [Combining Extrinsic and Intrinsic Calibration Parameters](camera_and_images/Combining Extrinsic and Intrinsic Calibration Parameters.md)
     * Calibrating Cameras
-* Multiple Views
+* [Multiple Views](multiple_views/Multiple Views.md)
+  * [Image-to-Image Projections](multiple_views/Image-to-Image Projections.md)
+  * [The Power of Homographies](multiple_views/The Power of Homographies.md)
 * [Feature Recognition](feature_recognition/Feature Recognition.md)
   * [Introduction to Features](feature_recognition/Introduction to Features.md)
   * Finding Interest Points
