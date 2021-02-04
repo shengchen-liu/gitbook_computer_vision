@@ -58,5 +58,12 @@
     * [Outlier Rejection](feature_recognition/Outlier Rejection.md)
     * [Error Functions](feature_recognition/Error Functions.md)
     * [RANSAC](feature_recognition/RANSAC.md)
+* [Motion](motion/motion.md)
+  * [Motion Estimation](motion/motion_estimation.md)
+    * [Lucas-Kanade](motion/lucas_and_kanade.md)
+  * [Motion Models](motion/Motion_Models.md)
+    * [Known Motion Geometry](motion/Known_Motion_Geometry.md)
+    * [Geometric Motion Constraints](motion/Geometric_Motion_Constraints.md)
+    * [Layered Motion](motion/Layered_Motion.md)
 * Problem Sets
   * [Object Tracking and Pedestrian Detection](ps_object_tracking.md)

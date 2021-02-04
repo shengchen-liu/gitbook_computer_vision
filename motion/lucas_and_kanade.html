@@ -1,0 +1,1353 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Lucas-Kanade · Computer Vision Learning Notes</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Shengchen Liu">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Motion_Models.html" />
+    
+    
+    <link rel="prev" href="motion_estimation.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://shengchen-liu.github.io/" target="_blank" class="custom-link">Home</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    Basic Image Manipulation
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../basic_image_manipulation/Image Noise.html">
+            
+                <a href="../basic_image_manipulation/Image Noise.html">
+            
+                    
+                    Image Noise
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../basic_image_manipulation/Filtering.html">
+            
+                <a href="../basic_image_manipulation/Filtering.html">
+            
+                    
+                    Filtering
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../basic_image_manipulation/Linearity and Convolution.html">
+            
+                <a href="../basic_image_manipulation/Linearity and Convolution.html">
+            
+                    
+                    Linearity and Convolution
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../basic_image_manipulation/Boundary Issues.html">
+            
+                <a href="../basic_image_manipulation/Boundary Issues.html">
+            
+                    
+                    Boundary Issues
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../basic_image_manipulation/Filter as Templates.html">
+            
+                <a href="../basic_image_manipulation/Filter as Templates.html">
+            
+                    
+                    Filters as Templates
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../edge_detection.html">
+            
+                <a href="../edge_detection.html">
+            
+                    
+                    Edge Detection
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../edge_detection/Gradients.html">
+            
+                <a href="../edge_detection/Gradients.html">
+            
+                    
+                    Gradients
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../edge_detection/Two Dimensional Detection.html">
+            
+                <a href="../edge_detection/Two Dimensional Detection.html">
+            
+                    
+                    Two Dimensional Detection
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../edge_detection/From Gradients to Edges.html">
+            
+                <a href="../edge_detection/From Gradients to Edges.html">
+            
+                    
+                    From Gradients to Edges
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../hough_transform.html">
+            
+                <a href="../hough_transform.html">
+            
+                    
+                    Hough Transform
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../hough transform/Line Fitting.html">
+            
+                <a href="../hough transform/Line Fitting.html">
+            
+                    
+                    Line Fitting
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../hough transform/Voting.html">
+            
+                <a href="../hough transform/Voting.html">
+            
+                    
+                    Voting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../hough transform/Hough Transform.html">
+            
+                <a href="../hough transform/Hough Transform.html">
+            
+                    
+                    Hough Transform
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.3" data-path="../hough transform/Polar Representation of Lines.html">
+            
+                <a href="../hough transform/Polar Representation of Lines.html">
+            
+                    
+                    Polar Representation of Lines
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.4" data-path="../hough transform/Hough Algorithm.html">
+            
+                <a href="../hough transform/Hough Algorithm.html">
+            
+                    
+                    Hough Algorithm
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.5" data-path="../hough transform/Extensions.html">
+            
+                <a href="../hough transform/Extensions.html">
+            
+                    
+                    Extensions - Using the Gradient
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../hough transform/Hough transform Circles.html">
+            
+                <a href="../hough transform/Hough transform Circles.html">
+            
+                    
+                    Finding Circles
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../hough transform/Generalization.html">
+            
+                <a href="../hough transform/Generalization.html">
+            
+                    
+                    Generalization - Hough Table
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    Camera and Images
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../camera_and_images/Camera.html">
+            
+                <a href="../camera_and_images/Camera.html">
+            
+                    
+                    Camera
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../camera_and_images/Blur.html">
+            
+                <a href="../camera_and_images/Blur.html">
+            
+                    
+                    Blur
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../camera_and_images/Lenses.html">
+            
+                <a href="../camera_and_images/Lenses.html">
+            
+                    
+                    Lenses
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../camera_and_images/Perspective Imaging.html">
+            
+                <a href="../camera_and_images/Perspective Imaging.html">
+            
+                    
+                    Perspective Imaging
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../camera_and_images/Homogeneous Coordinates.html">
+            
+                <a href="../camera_and_images/Homogeneous Coordinates.html">
+            
+                    
+                    Homogeneous Coordinates
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.2" data-path="../camera_and_images/Geometry in Perspective.html">
+            
+                <a href="../camera_and_images/Geometry in Perspective.html">
+            
+                    
+                    Geometry in Perspective
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.3" data-path="../camera_and_images/Orthographic Projection.html">
+            
+                <a href="../camera_and_images/Orthographic Projection.html">
+            
+                    
+                    Orthographic Projection
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.4" data-path="../camera_and_images/Weak Perspective.html">
+            
+                <a href="../camera_and_images/Weak Perspective.html">
+            
+                    
+                    Weak Perspective
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../camera_and_images/Stereo Geometry.html">
+            
+                <a href="../camera_and_images/Stereo Geometry.html">
+            
+                    
+                    Stereo Geometry
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../camera_and_images/Basic Stereo Geometry.html">
+            
+                <a href="../camera_and_images/Basic Stereo Geometry.html">
+            
+                    
+                    Basic Stereo Geometry
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.2" data-path="../camera_and_images/Epipolar Geometry.html">
+            
+                <a href="../camera_and_images/Epipolar Geometry.html">
+            
+                    
+                    Epipolar Geometry
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.3" data-path="../camera_and_images/Stereo Correspondence.html">
+            
+                <a href="../camera_and_images/Stereo Correspondence.html">
+            
+                    
+                    Stereo Correspondence
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.4" data-path="../camera_and_images/Better Stereo Coorespondence.html">
+            
+                <a href="../camera_and_images/Better Stereo Coorespondence.html">
+            
+                    
+                    Better Stereo Correspondence
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../camera_and_images/Geometric Camera Calibration.html">
+            
+                <a href="../camera_and_images/Geometric Camera Calibration.html">
+            
+                    
+                    Geometric Camera Calibration
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.4.1" data-path="../camera_and_images/Extrinsic Parameters.html">
+            
+                <a href="../camera_and_images/Extrinsic Parameters.html">
+            
+                    
+                    Extrinsic Parameters
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.2" data-path="../camera_and_images/Intrinsic Camera Calibration.html">
+            
+                <a href="../camera_and_images/Intrinsic Camera Calibration.html">
+            
+                    
+                    Intrinsic Parameters
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.3" data-path="../camera_and_images/Combining Extrinsic and Intrinsic Calibration Parameters.html">
+            
+                <a href="../camera_and_images/Combining Extrinsic and Intrinsic Calibration Parameters.html">
+            
+                    
+                    Combining Extrinsic and Intrinsic Calibration Parameters
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.4" >
+            
+                <span>
+            
+                    
+                    Calibrating Cameras
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../multiple_views/Multiple Views.html">
+            
+                <a href="../multiple_views/Multiple Views.html">
+            
+                    
+                    Multiple Views
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../multiple_views/Image-to-Image Projections.html">
+            
+                <a href="../multiple_views/Image-to-Image Projections.html">
+            
+                    
+                    Image-to-Image Projections
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../multiple_views/The Power of Homographies.html">
+            
+                <a href="../multiple_views/The Power of Homographies.html">
+            
+                    
+                    The Power of Homographies
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../multiple_views/Projective Geometry.html">
+            
+                <a href="../multiple_views/Projective Geometry.html">
+            
+                    
+                    Projective Geometry
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.3.1" data-path="../multiple_views/Essential Matrix.html">
+            
+                <a href="../multiple_views/Essential Matrix.html">
+            
+                    
+                    Essential Matrix
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3.2" data-path="../multiple_views/Fundamental Matrix.html">
+            
+                <a href="../multiple_views/Fundamental Matrix.html">
+            
+                    
+                    Fundamental Matrix
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../feature_recognition/Feature Recognition.html">
+            
+                <a href="../feature_recognition/Feature Recognition.html">
+            
+                    
+                    Feature Recognition
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../feature_recognition/Introduction to Features.html">
+            
+                <a href="../feature_recognition/Introduction to Features.html">
+            
+                    
+                    Introduction to Features
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" >
+            
+                <span>
+            
+                    
+                    Finding Interest Points
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.1" data-path="../feature_recognition/Finding Corners.html">
+            
+                <a href="../feature_recognition/Finding Corners.html">
+            
+                    
+                    Harris Corners
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2" data-path="../feature_recognition/Scale Invariance.html">
+            
+                <a href="../feature_recognition/Scale Invariance.html">
+            
+                    
+                    Scale Invariance (SIFT Detector)
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../feature_recognition/Matching Interest Points.html">
+            
+                <a href="../feature_recognition/Matching Interest Points.html">
+            
+                    
+                    Matching Interest Points
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.3.1" data-path="../feature_recognition/SIFT Descriptor.html">
+            
+                <a href="../feature_recognition/SIFT Descriptor.html">
+            
+                    
+                    SIFT Descriptor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3.2" data-path="../feature_recognition/Matching Feature Points.html">
+            
+                <a href="../feature_recognition/Matching Feature Points.html">
+            
+                    
+                    Matching Feature Points
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3.3" data-path="../feature_recognition/Feature Points for Object Recognition.html">
+            
+                <a href="../feature_recognition/Feature Points for Object Recognition.html">
+            
+                    
+                    Feature Points for Object Recognition
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../feature_recognition/Coming Full Circle Feature-Based Alignment.html">
+            
+                <a href="../feature_recognition/Coming Full Circle Feature-Based Alignment.html">
+            
+                    
+                    Feature-Based Alignment
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.4.1" data-path="../feature_recognition/Outlier Rejection.html">
+            
+                <a href="../feature_recognition/Outlier Rejection.html">
+            
+                    
+                    Outlier Rejection
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4.2" data-path="../feature_recognition/Error Functions.html">
+            
+                <a href="../feature_recognition/Error Functions.html">
+            
+                    
+                    Error Functions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4.3" data-path="../feature_recognition/RANSAC.html">
+            
+                <a href="../feature_recognition/RANSAC.html">
+            
+                    
+                    RANSAC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="motion.html">
+            
+                <a href="motion.html">
+            
+                    
+                    Motion
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="motion_estimation.html">
+            
+                <a href="motion_estimation.html">
+            
+                    
+                    Motion Estimation
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.8.1.1" data-path="lucas_and_kanade.html">
+            
+                <a href="lucas_and_kanade.html">
+            
+                    
+                    Lucas-Kanade
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="Motion_Models.html">
+            
+                <a href="Motion_Models.html">
+            
+                    
+                    Motion Models
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.2.1" data-path="Known_Motion_Geometry.html">
+            
+                <a href="Known_Motion_Geometry.html">
+            
+                    
+                    Known Motion Geometry
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2.2" data-path="Geometric_Motion_Constraints.html">
+            
+                <a href="Geometric_Motion_Constraints.html">
+            
+                    
+                    Geometric Motion Constraints
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2.3" data-path="Layered_Motion.html">
+            
+                <a href="Layered_Motion.html">
+            
+                    
+                    Layered Motion
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" >
+            
+                <span>
+            
+                    
+                    Problem Sets
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../ps_object_tracking.html">
+            
+                <a href="../ps_object_tracking.html">
+            
+                    
+                    Object Tracking and Pedestrian Detection
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Lucas-Kanade</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="dense-flow-lucas-and-kanade">Dense flow: Lucas and Kanade</h1>
+<p>Recall gradient component of flow:
+<script type="math/tex; mode=display">
+I_xu + I_yv + I_t = 0
+</script></p>
+<p>Solving the aperture problem:</p>
+<p><strong>Basic idea: Impose local constraints to get more equations for a pixel.</strong></p>
+<ul>
+<li>e.g: assume that the flow field is smooth locally.</li>
+</ul>
+<h2 id="1-lucas-kanade">1. Lucas Kanade</h2>
+<h3 id="11-assumption">1.1 Assumption</h3>
+<p>Assume the pixel&apos;s neighbors have the same <script type="math/tex; ">(u,v)</script>:</p>
+<ul>
+<li>If we use a 5x5 window, that gives us 25 equations per pixel.
+<script type="math/tex; mode=display">
+  \underbrace{
+  \begin{bmatrix}
+  I_x(p_1) & I_y(p_1) \\
+  I_x(p_2) & I_y(p_2) \\
+  ... & ... \\
+  I_x(p_25) & I_y(p_{25}) \\
+  \end{bmatrix}
+  }_{\boldsymbol{A},25 \times 2}
+  \underbrace{
+  \begin{bmatrix}
+  u \\
+  v
+  \end{bmatrix}
+  }_{\boldsymbol{d}, 2\times1}
+  = - 
+  \underbrace{
+  \begin{bmatrix}
+  I_t(p_1) \\
+  I_t(p_2) \\
+  ...  \\
+  I_t(p_{25})\\
+  \end{bmatrix}
+  }_{\boldsymbol{b},25 \times 1}
+  </script>
+This time, we have more equations than unknowns. </li>
+</ul>
+<h3 id="12-least-squares">1.2 Least Squares</h3>
+<p>Thus, we can use the standard <strong>least squares</strong> method on over-constrained system to find the best approximate solution: <script type="math/tex; ">\boldsymbol{(A^TA)d = A^T b}</script>, or in matrix form:
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+\sum I_xI_x & \sum I_xI_y \\
+\sum I_xI_y & \sum I_yI_y 
+\end{bmatrix}
+
+
+\begin{bmatrix}
+u \\
+v
+\end{bmatrix}
+= - 
+
+\begin{bmatrix}
+\sum I_xI_t \\
+\sum I_yI_y 
+\end{bmatrix}
+</script></p>
+<p>Minimize <script type="math/tex; ">||Ad - b|| ^2</script></p>
+<h3 id="13-conditions-for-solvability">1.3 Conditions for solvability</h3>
+<p>When is this solvable?</p>
+<ul>
+<li><script type="math/tex; ">A^TA</script> should be invertible</li>
+<li>So <script type="math/tex; ">A^TA</script> should be well-conditioned: <script type="math/tex; ">\lambda_1 / \lambda_2</script> should not be too large (<script type="math/tex; ">\lambda_1</script>: larger eigenvalue)</li>
+</ul>
+<p>Recall the Harris corner detector: <script type="math/tex; ">M = A^T A</script> is the second moment matrix, the eigenvectors and eigenvalues of <script type="math/tex; ">M</script> relate to edge direction and magnitude.</p>
+<p><img src="assets/image-20210202191050137.png" alt="image-20210202191050137"></p>
+<h3 id="14-errors-in-lucas-kanade">1.4 Errors in Lucas-Kanade</h3>
+<ul>
+<li><p>Brightness constancy does not hold:</p>
+<p>Do exhaustive neighborhood search with normalized correlation - tracking features &#x2013; maybe SIFT &#x2013; more later&#x2026;.</p>
+</li>
+<li><p>A point does not move like its neighbors:</p>
+<p>Motion segmentation</p>
+</li>
+<li><p>The motion is large (larger than a pixel) - Taylor doesn&apos;t hold</p>
+<ul>
+<li>Not-linear: iterative refinement</li>
+<li>Local minima: coarse-to-fine estimation</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-hierarchical-lk">2. Hierarchical LK</h2>
+<p>Hierarchical Lukas-Kanade is used if the motion is too big.  To overcome aliasing, <strong>coarse-to-fine estimation</strong> is used.</p>
+<h3 id="21-general-idea">2.1 General idea</h3>
+<p>we can make large changes seem smaller by just making the image smaller.  To do that, we introduce the idea of <strong>Gaussian Pyramids</strong>.</p>
+<p>We create a Gaussian pyramid for each of our images in time, then build our motion field from the lowest level.</p>
+<p><img src="assets/image-20210202200023489.png" alt="image-20210202200023489"></p>
+<p><img src="assets/image-20210202200133883.png" alt="image-20210202200133883"></p>
+<h3 id="22-steps">2.2 Steps</h3>
+<p>We start at the highest level in the image pyramids which contain the smallest images.  We calculate the flow field using standard (or iterative) Lucas-Kanade.  This flow field is small, but if we expand the image and double the flow field, we can get a rough approximation of the <em>next</em> pyramid&apos;s flow field.</p>
+<p>With that approximate flow field, we can warp (Image Rectification)  the actual <script type="math/tex; ">P_{t-1}^{-2}</script> towards <script type="math/tex; ">P_{t}^{-2}</script>.   This generate &quot;intermediate&quot; image.</p>
+<h3 id="22-procedure">2.2 Procedure</h3>
+<p><img src="assets/image-20210202201531823.png" alt="image-20210202201531823"></p>
+<ol>
+<li><p>Compute Iterative LK at level</p>
+</li>
+<li><p>Initialize <script type="math/tex; ">u_{K+1}, v_{K+1} = 0</script> at size of level <script type="math/tex; ">K+1</script></p>
+</li>
+<li><p>For each level <script type="math/tex; ">i</script> from <script type="math/tex; ">K</script> to 0:</p>
+<ul>
+<li><p>Upsample (expand) <script type="math/tex; ">u_{i+1},v_{i+1}</script> to create <script type="math/tex; ">u_i^p,v_i^p</script> flow fields of now twice resolution as level <script type="math/tex; ">i+1</script></p>
+</li>
+<li><p>Multiply <script type="math/tex; ">u_i^p,v_i^p</script> by 2 to get predicted flow</p>
+</li>
+<li><p>Warp level <script type="math/tex; ">i</script> Gaussian version of <script type="math/tex; ">I_2</script> according to predicted flow to create <script type="math/tex; ">I_2'</script></p>
+</li>
+<li><p>Apply LK between <script type="math/tex; ">I_2'</script> and level <script type="math/tex; ">i</script> Gaussian version of <script type="math/tex; ">I_1</script> to get <script type="math/tex; ">u_i^{\delta}, v_i^{\delta}</script> (the correction in flow)</p>
+</li>
+<li><p>Add corrections to obtain the flow <script type="math/tex; ">u_i, v_i</script> at i-th level, i.e.:
+<script type="math/tex; mode=display">
+     u_i = u_i^p + u_i^\delta \\
+     v_i = v_i^p + v_i^\delta \\
+     </script></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-image-pyramid">3. Image Pyramid</h2>
+<h3 id="31-laplacian-pyramid">3.1 Laplacian Pyramid</h3>
+<p><img src="assets/image-20210202202716638.png" alt="image-20210202202716638"></p>
+<h3 id="32-gaussian-pyramid-image-pyramid">3.2 Gaussian Pyramid (image pyramid)</h3>
+<p><img src="assets/image-20210202202618917.png" alt="image-20210202202618917"></p>
+<h3 id="33-computing-the-laplacian-pyramid">3.3 Computing the Laplacian Pyramid</h3>
+<p><img src="assets/image-20210202202822185.png" alt="image-20210202202822185"></p>
+<h3 id="34-reduce-and-expand">3.4 Reduce and Expand</h3>
+<p><img src="assets/image-20210202202948287.png" alt="image-20210202202948287"></p>
+<p><strong>Reduce</strong>: apply &quot;5-tap&quot; (1 4 6 4 1 ) / 16 separable filter to make reduced image</p>
+<p><strong>Expand</strong>: Apply different &#x201C;3-tap&#x201D; separable filters for even and odd pixels to make expanded image.</p>
+<h2 id="4-sparse-flow">4. Sparse Flow</h2>
+<p>Sparse LK is a variant of Hierarchical Lucas-Kanade that is only applied to interest points.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="motion_estimation.html" class="navigation navigation-prev " aria-label="Previous page: Motion Estimation">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Motion_Models.html" class="navigation navigation-next " aria-label="Next page: Motion Models">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Lucas-Kanade","level":"1.8.1.1","depth":3,"next":{"title":"Motion Models","level":"1.8.2","depth":2,"path":"motion/Motion_Models.md","ref":"motion/Motion_Models.md","articles":[{"title":"Known Motion Geometry","level":"1.8.2.1","depth":3,"path":"motion/Known_Motion_Geometry.md","ref":"motion/Known_Motion_Geometry.md","articles":[]},{"title":"Geometric Motion Constraints","level":"1.8.2.2","depth":3,"path":"motion/Geometric_Motion_Constraints.md","ref":"motion/Geometric_Motion_Constraints.md","articles":[]},{"title":"Layered Motion","level":"1.8.2.3","depth":3,"path":"motion/Layered_Motion.md","ref":"motion/Layered_Motion.md","articles":[]}]},"previous":{"title":"Motion Estimation","level":"1.8.1","depth":2,"path":"motion/motion_estimation.md","ref":"motion/motion_estimation.md","articles":[{"title":"Lucas-Kanade","level":"1.8.1.1","depth":3,"path":"motion/lucas_and_kanade.md","ref":"motion/lucas_and_kanade.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["mathjax"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mathjax":{"forceSVG":false,"version":"2.6-latest"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Shengchen Liu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Computer Vision Learning Notes","links":{"sidebar":{"Home":"https://shengchen-liu.github.io/"}},"gitbook":"*","description":"A collection of learning notes of computer vision"},"file":{"path":"motion/lucas_and_kanade.md","mtime":"2021-02-03T01:31:20.823Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-04T06:09:00.136Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-mathjax/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

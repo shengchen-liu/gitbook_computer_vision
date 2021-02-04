@@ -4,7 +4,7 @@
 
 We have two cameras but don't know their calibration parameters (such as focal length).
 
-So weed to estimate the epipolar geometry from a redundant set of point correspondences across the uncalibrated cameras.
+So need to estimate the epipolar geometry from a redundant set of point correspondences across the uncalibrated cameras.
 
 ## 2. Calibration Matrix
 
