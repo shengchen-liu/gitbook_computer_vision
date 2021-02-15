@@ -66,8 +66,8 @@
     * [Geometric Motion Constraints](motion/Geometric_Motion_Constraints.md)
     * [Layered Motion](motion/Layered_Motion.md)
 
-- [Tracking](tracking/)
-  - [Tracking with Dynamics](tracking/Introduction_to_tracking.md)
+- [Tracking](tracking/Introduction_to_tracking.md)
+  - [Tracking with Dynamics](tracking/Tracking_With_Dynamics.md)
     - [Tracking as Inference](tracking/Tracking_as_Inference.md)
     - [Tracking as Induction](tracking/Tracking_as_Induction.md)
     - [Prediction](tracking/Prediction.md)
