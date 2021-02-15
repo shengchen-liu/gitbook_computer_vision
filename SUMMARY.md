@@ -65,5 +65,14 @@
     * [Known Motion Geometry](motion/Known_Motion_Geometry.md)
     * [Geometric Motion Constraints](motion/Geometric_Motion_Constraints.md)
     * [Layered Motion](motion/Layered_Motion.md)
+
+- [Tracking](tracking/)
+  - [Tracking with Dynamics](tracking/Introduction_to_tracking.md)
+    - [Tracking as Inference](tracking/Tracking_as_Inference.md)
+    - [Tracking as Induction](tracking/Tracking_as_Induction.md)
+    - [Prediction](tracking/Prediction.md)
+    - [Correction](tracking/Corrections.md)
+  - Kalman Filter
+
 * Problem Sets
   * [Object Tracking and Pedestrian Detection](ps_object_tracking.md)
